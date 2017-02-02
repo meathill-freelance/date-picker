@@ -1,0 +1,60 @@
+.tqb-date-picker .calendar
+  header h4
+    color aqua
+    text-align center
+    margin 0
+    line-height 2.5
+    font-weight normal
+
+  ul
+    display flex
+    flex-wrap wrap
+    margin 0
+    padding 0
+
+    li
+      list-style none
+      min-width 14%
+      max-width 14.29%
+      flex 1
+      text-align center
+      line-height 50px
+
+      for n in (1..6)
+        &.empty-{n}
+          counter-reset date
+          flex n
+          min-width 14%*n
+          max-width 100%
+
+      &:not(:first-child):before
+        content counter(date)
+        counter-increment date
+
+      &.disabled
+        color: gray
+
+      &.today
+        position relative
+
+        &:after
+          content: ''
+          position absolute
+          width 4px
+          height 4px
+          line-height 4px
+          font-size 4px
+          background-color red
+          border-radius 50%
+          left 50%
+          margin-left -2px
+          bottom .5em
+
+      &.select
+        background alpha(aqua, .5)
+
+        &.start
+          background radial-gradient(circle at center, aqua 0, aqua 68%,transparent 68%, transparent 100%), linear-gradient(to right, transparent 0, transparent 50%, alpha(aqua, .5) 50%, alpha(aqua, .5) 50%)
+
+        &.end
+          background radial-gradient(circle at center, aqua 0, aqua 68%,transparent 68%, transparent 100%), linear-gradient(to right, alpha(aqua, .5) 0, alpha(aqua, .5) 50%, transparent 50%, transparent 50%)
