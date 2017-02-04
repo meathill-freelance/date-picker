@@ -5,4 +5,8 @@
   var DatePicker = window.TQBDatePicker = function () {
 
   };
+
+  $('body').click('.tqb-date-picker', function (event) {
+
+  });
 }(window));
