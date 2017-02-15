@@ -69,7 +69,9 @@ class EasyDate {
 
   static fill(length) {
     let arr = [];
-    arr.length = length;
+    for (let i = 0; i < length; i++) {
+      arr[i] = 0;
+    }
     return arr;
   }
 

@@ -10,9 +10,6 @@ export default class DatePicker {
     this.createElement(options);
     this.delegateEvent();
 
-    if (options.isStatic) {
-      this.el.addClass('static');
-    }
     if (options.show) {
       this.show();
     }
@@ -23,12 +20,13 @@ export default class DatePicker {
     let current = new EasyDate();
     let end = new EasyDate('+1m');
     let months = [];
-    while (current < end) {
+    while (current.toDate() < end.toDate()) {
       months.push(this.createMonthObject(current, today));
       current.add('1m');
     }
     let data = {
       hasClose: options.hasClose,
+      static: options.static,
       months: months
     };
     let item = $(template(data));
@@ -36,8 +34,8 @@ export default class DatePicker {
     this.el = item;
   }
 
-  createMonthObject(current) {
-    return current.toObject();
+  createMonthObject(current, today) {
+    return current.toObject(today);
   }
 
   delegateEvent() {

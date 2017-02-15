@@ -1,9 +1,7 @@
 /**
  * Created by realm on 2017/2/15.
  */
-import Handlebars from 'handlebars';
-
-let template = `<div id="sample" class="tqb-date-picker static">
+let template = `<div id="sample" class="tqb-date-picker {{#if static}}static{{/if}}">
   <header class="tqb-dp-header">
     <button type="button">&lt;</button>
     <h3>今日保障日期</h3>
