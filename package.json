@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "keywords": [
     "date picker",
@@ -19,9 +20,16 @@
     "jquery": "^3.1.1"
   },
   "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.1",
+    "babel-register": "^6.23.0",
     "colors.css": "^2.3.0",
     "handlebars": "^4.0.6",
+    "mocha": "^3.2.0",
     "moment": "^2.17.1",
-    "qunitjs": "^2.1.1"
+    "qunitjs": "^2.1.1",
+    "should": "^11.2.0",
+    "webpack": "^2.2.1"
   }
 }
