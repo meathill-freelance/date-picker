@@ -11,6 +11,9 @@ const METHODS = {
 class EasyDate {
   constructor(offset) {
     this.base = new Date();
+    this.base.setHours(0);
+    this.base.setMinutes(0);
+    this.base.setSeconds(0);
     this.add(offset);
   }
 
@@ -76,6 +79,7 @@ class EasyDate {
   }
 
   static toMonth(month) {
+    month += 1;
     return month > 9 ? month.toString() : ('0' + month);
   }
 

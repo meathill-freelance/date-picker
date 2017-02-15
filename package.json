@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack",
+    "watch:stylus": "stylus -w styl/screen.styl -o css/ --sourcemap"
   },
   "keywords": [
     "date picker",
@@ -23,6 +24,7 @@
     "babel": "^6.23.0",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.1",
+    "babel-preset-env": "^1.1.8",
     "babel-register": "^6.23.0",
     "colors.css": "^2.3.0",
     "handlebars": "^4.0.6",

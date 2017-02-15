@@ -3,15 +3,16 @@
  */
 import DatePicker from './DatePicker';
 
-$('body').click('.tqb-date-picker-input', function (event) {
+$('body').on('click', '.tqb-date-picker-input', function (event) {
   let target = $(event.currentTarget);
-  let picker = target.data('tqb-date-picker');
+  let options = target.data();
+  let picker = options.tqbDatePicker;
   if (picker) {
     picker.show();
   }
-  picker = new DatePicker(target, {
-    show: true
-  });
+  options.show = true;
+  picker = new DatePicker(target, options);
+  target.data('tqb-date-picker', picker);
 });
 
 $('body .tqb-date-picker-input').prop('readonly', true);

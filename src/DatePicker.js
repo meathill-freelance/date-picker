@@ -18,10 +18,12 @@ export default class DatePicker {
   createElement(options) {
     let today = new Date();
     let current = new EasyDate();
-    let end = new EasyDate('+1m');
+    let end = new EasyDate('+2m');
+    let start = options.start || today;
+    let range = options.end;
     let months = [];
     while (current.toDate() < end.toDate()) {
-      months.push(this.createMonthObject(current, today));
+      months.push(this.createMonthObject(current, today, start, range));
       current.add('1m');
     }
     let data = {
@@ -38,6 +40,10 @@ export default class DatePicker {
     return current.toObject(today);
   }
 
+  confirm() {
+
+  }
+
   delegateEvent() {
     this.el
       .on('click', 'li', event => {
@@ -45,6 +51,9 @@ export default class DatePicker {
       })
       .on('click', '.close-button', event => {
         this.hide();
+      })
+      .on('click', '.confirm-button', event => {
+        this.confirm();
       });
   }
 
