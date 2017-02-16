@@ -2,7 +2,6 @@
  * Created by realm on 2017/2/15.
  */
 
-const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 const METHODS = {
   m: 'Month',
   d: 'Date'
@@ -13,6 +12,10 @@ class EasyDate {
   constructor(offset, options = {}) {
     this.format = options.format || defaultFormat;
     if (EasyDate.isDate(offset, this.format)) {
+      this.base = new Date(offset);
+      return;
+    }
+    if (offset instanceof Date) {
       this.base = new Date(offset);
       return;
     }
@@ -38,19 +41,11 @@ class EasyDate {
   }
 
   clone() {
-    return new Date(this.base.getTime());
+    return new EasyDate(this.base);
   }
 
-  getDays(today) {
-    let month = this.base.getMonth();
-    let year = this.base.getFullYear();
-    let days = EasyDate.fill(month === 1 && EasyDate.isLeapYear(year) ? 29 : DAYS[month]);
-    if (this.isSameMonth(today)) {
-      days[today.getDate() - 1] = {
-        today: true
-      };
-    }
-    return days;
+  getDay() {
+    return this.base.getDay();
   }
 
   getFirstDayOfThisMonth() {
@@ -63,40 +58,48 @@ class EasyDate {
     return this.base.getFullYear() === date.getFullYear() && this.base.getMonth() === date.getMonth();
   }
 
+  setDate(date) {
+    this.base.setDate(date);
+  }
+
   toDate() {
     return this.base;
   }
 
-  toObject(today) {
+  toObject(today, start, end) {
     let month = this.base.getMonth();
     return {
       year: this.base.getFullYear(),
       month: EasyDate.toMonth(month),
       empty: this.getFirstDayOfThisMonth(),
-      days: this.getDays(today)
+      days: EasyDate.getDates(this.base, today, start, end)
     };
   }
 
   toString() {
-    return this.base.getTime();
+    return this.base.toISOString();
   }
 
-  static fill(length) {
-    let arr = [];
-    for (let i = 0; i < length; i++) {
-      arr[i] = 0;
+  static getDates(date, today, start, end) {
+    let month = date.getMonth();
+    date = new Date(date);
+    date.setDate(1);
+    let dates = [];
+    while (date.getMonth() === month) {
+      let label = date.toISOString();
+      dates.push({
+        date: label,
+        today: today.toString() == label,
+        disabled: label < start.toString() || label > end.toString()
+      });
+      date.setDate(date.getDate() + 1);
     }
-    return arr;
-  }
-
-  static toMonth(month) {
-    month += 1;
-    return month > 9 ? month.toString() : ('0' + month);
+    return dates;
   }
 
   static isDate(string, format) {
     format = format.replace(/[ymd]+/gi, match => {
-      return '\d{' + match.length + '}';
+      return '\\d{' + match.length + '}';
     });
     let regexp = new RegExp('^' + format + '$');
     return regexp.test(string);
@@ -120,6 +123,11 @@ class EasyDate {
       result[unit] = Number(number);
     });
     return result;
+  }
+
+  static toMonth(month) {
+    month += 1;
+    return month > 9 ? month.toString() : ('0' + month);
   }
 }
 

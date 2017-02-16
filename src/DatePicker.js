@@ -4,6 +4,11 @@
 import template from './template';
 import EasyDate from './EasyDate';
 
+const toString = Object.prototype.toString;
+function isString(obj) {
+  return toString.call(obj) === '[object ' + name + ']';
+}
+
 export default class DatePicker {
   constructor(target, options = {}) {
     this.target = target;
@@ -17,13 +22,12 @@ export default class DatePicker {
 
   createElement(options) {
     let today = new EasyDate(0, options);
-    let current = new EasyDate(0, options);
-    let end = new EasyDate('+2m', options);
-    let start = options.start || today;
-    let range = options.end;
+    let start = options.start ? new EasyDate(options.start) : today;
+    let end = options.end ? new EasyDate(options.end) : new EasyDate('+2m', options);
+    let current = start.clone();
     let months = [];
-    while (current < end) {
-      months.push(this.createMonthObject(current, today, start, range));
+    while (current <= end) {
+      months.push(DatePicker.createMonthObject(current, today, start, end));
       current.add('1m');
     }
     let data = Object.assign({
@@ -34,17 +38,13 @@ export default class DatePicker {
     this.el = item;
   }
 
-  createMonthObject(current, today) {
-    return current.toObject(today);
-  }
-
   confirm() {
 
   }
 
   delegateEvent() {
     this.el
-      .on('click', 'li', event => {
+      .on('click', 'li:not(.disabled)', event => {
 
       })
       .on('click', '.close-button', event => {
@@ -61,5 +61,11 @@ export default class DatePicker {
 
   hide() {
     this.el.addClass('hide');
+  }
+
+  static createMonthObject(current, today, start, end) {
+    start = isString(start) ? new EasyDate(start) : start;
+    end = isString(end) ? new EasyDate(end) : end;
+    return current.toObject(today, start, end);
   }
 };

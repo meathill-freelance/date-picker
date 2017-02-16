@@ -3,6 +3,7 @@
  */
 const should = require('should');
 const EasyDate = require('../../src/EasyDate').default;
+const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 describe('Date', () => {
   let date = new EasyDate('+1m');
@@ -23,20 +24,12 @@ describe('Date', () => {
     });
   });
 
-  describe('#fill', () => {
-    it('should create a array', () => {
-      let length = Math.random() * 100 >> 0;
-      let arr = EasyDate.fill(length);
-      should(arr).be.an.Array();
-      should(arr.length).equal(length);
-    });
-  });
-
-  describe('#getDays', () => {
+  describe('#getDates', () => {
     it('should get days', () => {
       let today = new Date();
-      let days = date.getDays(today);
+      let days = EasyDate.getDates(date.base, today, today);
       should(days).be.an.Array();
+      should(days.length).equal(DAYS[date.base.getMonth()]);
     });
   });
 
@@ -51,8 +44,8 @@ describe('Date', () => {
 
   describe('#getMonth', () => {
     it('输出月份，个位数前面自动补0', () => {
-      should(EasyDate.toMonth(10)).equal('10');
-      should(EasyDate.toMonth(8)).equal('08');
+      should(EasyDate.toMonth(10)).equal('11');
+      should(EasyDate.toMonth(8)).equal('09');
     });
   });
 
@@ -60,8 +53,8 @@ describe('Date', () => {
     it('是否为符合要求的日期', () => {
       let format = 'yyyy-mm-dd';
       should(EasyDate.isDate('2016-10-12', format)).be.True();
-      should(EasyDate.isDate('2016-0-12', format)).be.True();
-      should(EasyDate.isDate('+1m', format)).be.True();
+      should(EasyDate.isDate('2016-0-12', format)).be.False();
+      should(EasyDate.isDate('+1m', format)).be.False();
     });
   });
 
