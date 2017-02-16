@@ -1,6 +1,17 @@
 /**
  * Created by realm on 2017/2/15.
  */
+let calendar = `<div class="tqb-calendar-item month-{{year}}-{{month}}">
+  <header>
+    <h4>{{year}}年{{month}}月</h4>
+  </header>
+  <ul>
+    <li class="empty-{{empty}}"></li>
+    {{#each days}}
+    <li class="{{#if disabled}}disabled{{/if}}{{#if today}}today{{/if}}" data-date="{{date}}"></li>
+    {{/each}}
+  </ul>
+</div>`;
 let template = `<div id="sample" class="tqb-date-picker {{#if static}}static{{/if}}">
   <header class="tqb-dp-header">
     <button type="button" class="close-button">&lt;</button>
@@ -19,18 +30,12 @@ let template = `<div id="sample" class="tqb-date-picker {{#if static}}static{{/i
     </ul>
   </header>
   {{#each months}}
-  <div class="tqb-calendar-item month-{{year}}-{{month}}">
-    <header>
-      <h4>{{year}}年{{month}}月</h4>
-    </header>
-    <ul>
-      <li class="empty-{{empty}}"></li>
-      {{#each days}}
-      <li class="{{#if disabled}}disabled{{/if}}{{#if today}}today{{/if}}"></li>
-      {{/each}}
-    </ul>
-  </div>
+  {{> month}}
   {{/each}}
 </div>`;
 
-export default Handlebars.compile(template);
+calendar = Handlebars.compile(calendar);
+Handlebars.registerPartial('month', calendar);
+template = Handlebars.compile(template);
+
+export {calendar, template};

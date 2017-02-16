@@ -89,8 +89,8 @@ class EasyDate {
       let label = date.toISOString();
       dates.push({
         date: label,
-        today: today.toString() == label,
-        disabled: label < start.toString() || label > end.toString()
+        today: today && today.toString() == label,
+        disabled: (start && label < start.toString()) || (end && label > end.toString())
       });
       date.setDate(date.getDate() + 1);
     }
