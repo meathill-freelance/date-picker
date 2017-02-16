@@ -7,9 +7,16 @@ const METHODS = {
   m: 'Month',
   d: 'Date'
 };
+const defaultFormat = 'yyyy-mm-dd';
 
 class EasyDate {
-  constructor(offset) {
+  constructor(offset, options = {}) {
+    this.format = options.format || defaultFormat;
+    if (EasyDate.isDate(offset, this.format)) {
+      this.base = new Date(offset);
+      return;
+    }
+
     this.base = new Date();
     this.base.setHours(0);
     this.base.setMinutes(0);
@@ -20,7 +27,7 @@ class EasyDate {
   add(offset) {
     offset = EasyDate.parse(offset);
     if (!offset) {
-
+      return;
     }
     for (let key in offset) {
       if (offset.hasOwnProperty(key)) {
@@ -70,6 +77,10 @@ class EasyDate {
     };
   }
 
+  toString() {
+    return this.base.getTime();
+  }
+
   static fill(length) {
     let arr = [];
     for (let i = 0; i < length; i++) {
@@ -81,6 +92,14 @@ class EasyDate {
   static toMonth(month) {
     month += 1;
     return month > 9 ? month.toString() : ('0' + month);
+  }
+
+  static isDate(string, format) {
+    format = format.replace(/[ymd]+/gi, match => {
+      return '\d{' + match.length + '}';
+    });
+    let regexp = new RegExp('^' + format + '$');
+    return regexp.test(string);
   }
 
   static isLeapYear(year) {

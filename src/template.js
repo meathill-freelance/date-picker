@@ -3,10 +3,10 @@
  */
 let template = `<div id="sample" class="tqb-date-picker {{#if static}}static{{/if}}">
   <header class="tqb-dp-header">
-    <button type="button">&lt;</button>
+    <button type="button" class="close-button">&lt;</button>
     <h3>今日保障日期</h3>
-    {{#if hasClose}}
-    <button type="button">&times;</button>
+    {{#if confirm}}
+    <button type="button" class="confirm-button">确定</button>
     {{/if}}
   </header>
   <ul class="tqb-labels">

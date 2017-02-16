@@ -56,6 +56,15 @@ describe('Date', () => {
     });
   });
 
+  describe('#isDate', () => {
+    it('是否为符合要求的日期', () => {
+      let format = 'yyyy-mm-dd';
+      should(EasyDate.isDate('2016-10-12', format)).be.True();
+      should(EasyDate.isDate('2016-0-12', format)).be.True();
+      should(EasyDate.isDate('+1m', format)).be.True();
+    });
+  });
+
   describe('#isLeapYear', () => {
     it('是否为闰年', () => {
       should(EasyDate.isLeapYear(2000)).be.True();

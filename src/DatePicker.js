@@ -16,21 +16,19 @@ export default class DatePicker {
   }
 
   createElement(options) {
-    let today = new Date();
-    let current = new EasyDate();
-    let end = new EasyDate('+2m');
+    let today = new EasyDate(0, options);
+    let current = new EasyDate(0, options);
+    let end = new EasyDate('+2m', options);
     let start = options.start || today;
     let range = options.end;
     let months = [];
-    while (current.toDate() < end.toDate()) {
+    while (current < end) {
       months.push(this.createMonthObject(current, today, start, range));
       current.add('1m');
     }
-    let data = {
-      hasClose: options.hasClose,
-      static: options.static,
+    let data = Object.assign({
       months: months
-    };
+    }, options);
     let item = $(template(data));
     item.appendTo(document.body);
     this.el = item;
