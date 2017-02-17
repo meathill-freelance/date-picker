@@ -12,7 +12,7 @@ let calendar = `<div class="tqb-calendar-item month-{{year}}-{{month}}">
     {{/each}}
   </ul>
 </div>`;
-let template = `<div id="sample" class="tqb-date-picker {{#if static}}static{{/if}}">
+let template = `<div id="sample" class="tqb-date-picker out {{#if static}}static{{/if}}">
   <header class="tqb-dp-header">
     <button type="button" class="close-button">&lt;</button>
     <h3>今日保障日期</h3>
@@ -29,9 +29,11 @@ let template = `<div id="sample" class="tqb-date-picker {{#if static}}static{{/i
       <li class="saturday">六</li>
     </ul>
   </header>
-  {{#each months}}
-  {{> month}}
-  {{/each}}
+  <div class="container">
+    {{#each months}}
+    {{> month}}
+    {{/each}}
+  </div>  
 </div>`;
 
 calendar = Handlebars.compile(calendar);

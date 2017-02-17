@@ -70,25 +70,38 @@ class EasyDate {
     let month = this.base.getMonth();
     return {
       year: this.base.getFullYear(),
-      month: EasyDate.toMonth(month),
+      month: EasyDate.toDouble(month + 1),
       empty: this.getFirstDayOfThisMonth(),
-      days: EasyDate.getDates(this.base, today, start, end)
+      days: EasyDate.getDates(this.base, today, start, end, this.format)
     };
   }
 
   toString() {
-    return this.base.toISOString();
+    return EasyDate.format(this.base, this.format);
+  }
+  
+  static format(date, format) {
+    return format
+      .replace(/y+/gi, () => {
+        return date.getFullYear();
+      })
+      .replace(/m+/gi, () => {
+        return EasyDate.toDouble(date.getMonth() + 1);
+      })
+      .replace(/d+/gi, () => {
+        return EasyDate.toDouble(date.getDate());
+      });
   }
 
-  static getDates(date, today, start, end) {
+  static getDates(date, today, start, end, format) {
     let month = date.getMonth();
     date = new Date(date);
     date.setDate(1);
     let dates = [];
     while (date.getMonth() === month) {
-      let label = date.toISOString();
+      let label = EasyDate.format(date, format);
       dates.push({
-        date: label,
+        date: label.substr(0, 10),
         today: today && today.toString() == label,
         disabled: (start && label < start.toString()) || (end && label > end.toString())
       });
@@ -125,9 +138,8 @@ class EasyDate {
     return result;
   }
 
-  static toMonth(month) {
-    month += 1;
-    return month > 9 ? month.toString() : ('0' + month);
+  static toDouble(number) {
+    return number > 9 ? number.toString() : ('0' + number);
   }
 }
 

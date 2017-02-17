@@ -8,7 +8,7 @@ $('body').on('click', '.tqb-date-picker-input', function (event) {
   let options = target.data();
   let picker = options.tqbDatePicker;
   if (picker) {
-    picker.show();
+    return picker.show();
   }
   options.show = true;
   picker = new DatePicker(target, options);

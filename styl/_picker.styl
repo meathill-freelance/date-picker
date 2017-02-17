@@ -1,13 +1,15 @@
 .tqb-date-picker
   background-color white
   position fixed
-  top header-height + labels-height
+  top 0
   left 0
   right 0
   bottom 0
   font-size root-font-size
-  overflow-y auto
   z-index 1024
+  transition all 0.2s
+  display flex
+  flex-direction column
 
   &.static
     position static
@@ -17,6 +19,14 @@
 
   &.hide
     display none !important
+
+  &.out
+    transform scale(0.85)
+    opacity 0.85
+
+  .container
+    flex 1
+    overflow-y auto
 
 @import "picker/_header.styl"
 @import "picker/_labels.styl"

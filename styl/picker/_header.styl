@@ -1,15 +1,9 @@
 .tqb-date-picker .tqb-dp-header
-  position fixed
-  top 0
-  left 0
-  right 0
-  z-index 1025
-  background-color white
 
   h3
     text-align center
     line-height header-height
-    font-size 1.2rem
+    font-size 1.2em
     font-weight normal
     margin 0
 
@@ -19,14 +13,16 @@
     background-color white
     border none
     color gray
-    font-size 1.5em
     padding 0
-    width 40px
     height header-height - 2px
     line-height header-height - 6px
 
     &:first-child
+      font-size 1.5em
       left 0
+      width 40px
 
-    &:last-child
+    &.confirm-button
       right 0
+      font-size 1em
+      width 60px
