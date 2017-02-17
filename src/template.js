@@ -8,7 +8,7 @@ let calendar = `<div class="tqb-calendar-item month-{{year}}-{{month}}">
   <ul>
     <li class="empty-{{empty}}"></li>
     {{#each days}}
-    <li class="{{#if disabled}}disabled{{/if}}{{#if today}}today{{/if}}" data-date="{{date}}" data-index="{{@index}}"></li>
+    <li class="{{#if disabled}}disabled{{/if}}{{#if today}}today{{/if}}" data-date="{{date}}" data-index="{{index}}"></li>
     {{/each}}
   </ul>
 </div>`;

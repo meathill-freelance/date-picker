@@ -117,8 +117,8 @@ export default class DatePicker {
       return;
     }
 
-    let startIndex = start.index();
-    let index = li.index();
+    let startIndex = start.data('index');
+    let index = li.data('index');
     if (startIndex <= index) {
       li.addClass('select end');
     } else {
