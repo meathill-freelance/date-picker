@@ -29,6 +29,7 @@ export default class DatePicker {
     if (options.show) {
       this.show();
     }
+    this.options = options;
   }
 
   createElement(options) {
@@ -63,14 +64,9 @@ export default class DatePicker {
   }
 
   delegateEvent(options) {
-    let clickHandler;
-    if (options.scattered) {
-      clickHandler = this.onClick_scattered;
-    } else {
-      clickHandler = options.hasConfirm ? this.onClick : this.onClick_auto;
-    }
+    let clickHandler = options.scattered ? DatePicker.onClick_scattered : this.onClick;
     this.$el
-      .on('click', 'li:not(.disabled)', clickHandler)
+      .on('click', 'li:not(.disabled)', clickHandler.bind(this))
       .on('click', '.close-button', () => {
         this.$el.addClass('out');
       })
@@ -105,14 +101,39 @@ export default class DatePicker {
   }
 
   onClick(event) {
+    let start = this.$el.find('.start');
+    let end = this.$el.find('.end');
+    if (start.length && end.length) {
+      start.removeClass('start');
+      end.removeClass('end');
+      this.$el.find('select').removeClass('select');
+    }
 
+    let li = $(event.currentTarget);
+    if (start.length === 0 && end.length === 0) {
+      li.addClass('select start');
+      return;
+    }
+
+    let startIndex = start.index();
+    let index = li.index();
+    if (startIndex <= index) {
+      li.addClass('select end');
+    } else {
+      start.removeClass('start')
+        .addClass('end');
+      li.addClass('select start');
+    }
+    this.$el.find(`.container li:not([class^=empty])`)
+      .slice(Math.min(startIndex, index), Math.max(startIndex, index))
+      .addClass('select');
+
+    if (!this.options.confirm) {
+      this.confirm();
+    }
   }
 
-  onClick_auto(event) {
-
-  }
-
-  onClick_scattered(event) {
+  static onClick_scattered(event) {
     let li = $(event.currentTarget);
     li.toggleClass('select');
   }
