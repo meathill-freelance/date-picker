@@ -106,12 +106,14 @@ export default class DatePicker {
     if (start.length && end.length) {
       start.removeClass('start');
       end.removeClass('end');
-      this.$el.find('select').removeClass('select');
+      this.$el.find('.select').removeClass('select');
+      start = end = null;
     }
 
     let li = $(event.currentTarget);
-    if (start.length === 0 && end.length === 0) {
+    if ((!start || start.length === 0) && (!end || end.length === 0)) {
       li.addClass('select start');
+      start = li;
       return;
     }
 
@@ -127,8 +129,9 @@ export default class DatePicker {
     this.$el.find(`.container li:not([class^=empty])`)
       .slice(Math.min(startIndex, index), Math.max(startIndex, index))
       .addClass('select');
+    end = li;
 
-    if (!this.options.confirm) {
+    if (!this.options.confirm && start.length && end.length) {
       this.confirm();
     }
   }
