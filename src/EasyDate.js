@@ -7,7 +7,6 @@ const METHODS = {
   d: 'Date'
 };
 const defaultFormat = 'yyyy-mm-dd';
-let counter = 0;
 
 class EasyDate {
   constructor(offset, options = {}) {
@@ -102,7 +101,6 @@ class EasyDate {
     while (date.getMonth() === month) {
       let label = EasyDate.format(date, format);
       dates.push({
-        index: counter++,
         date: label.substr(0, 10),
         today: today && today.toString() == label,
         disabled: (start && label < start.toString()) || (end && label > end.toString())

@@ -39,8 +39,15 @@ export default class DatePicker {
     let range = end || new EasyDate('+1m');
     let current = start.clone();
     let months = [];
+    let counter = 0;
     while (current <= range) {
-      months.push(DatePicker.createMonthObject(current, today, start, end));
+      let month = DatePicker.createMonthObject(current, today, start, end);
+      month.days = month.days.map( (item, i) => {
+        item['index'] = counter + i;
+        return item;
+      });
+      months.push(month);
+      counter += month.days.length;
       current.add('1m');
     }
     let data = Object.assign({
@@ -126,7 +133,7 @@ export default class DatePicker {
         .addClass('end');
       li.addClass('select start');
     }
-    this.$el.find(`.container li:not([class^=empty])`)
+    this.$el.find(`li[data-index]`)
       .slice(Math.min(startIndex, index), Math.max(startIndex, index))
       .addClass('select');
     end = li;

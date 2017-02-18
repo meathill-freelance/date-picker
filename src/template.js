@@ -12,7 +12,7 @@ let calendar = `<div class="tqb-calendar-item month-{{year}}-{{month}}">
     {{/each}}
   </ul>
 </div>`;
-let template = `<div class="tqb-date-picker out {{#if static}}static{{/if}}">
+let template = `<div class="tqb-date-picker out {{#if static}}static{{/if}} {{#if scattered}}scattered{{else}}continuous{{/if}}">
   <header class="tqb-dp-header">
     <button type="button" class="close-button">&lt;</button>
     <h3>今日保障日期</h3>
