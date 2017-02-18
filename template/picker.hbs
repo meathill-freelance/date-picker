@@ -1,0 +1,23 @@
+<div class="tqb-date-picker out {{#if static}}static{{/if}} {{#if scattered}}scattered{{else}}continuous{{/if}}">
+  <header class="tqb-dp-header">
+    <button type="button" class="close-button">&lt;</button>
+    <h3>今日保障日期</h3>
+    {{#if confirm}}
+      <button type="button" class="confirm-button">确定</button>
+    {{/if}}
+    <ul class="tqb-labels">
+      <li class="sunday">日</li>
+      <li>一</li>
+      <li>二</li>
+      <li>三</li>
+      <li>四</li>
+      <li>五</li>
+      <li class="saturday">六</li>
+    </ul>
+  </header>
+  <div class="container">
+    {{#each months}}
+      {{> calendar}}
+    {{/each}}
+  </div>
+</div>

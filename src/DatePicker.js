@@ -1,7 +1,8 @@
 /**
  * Created by realm on 2017/2/15.
  */
-import {template, calendar} from './template';
+import template from '../template/picker.hbs';
+import calendar from '../template/calendar.hbs';
 import EasyDate from './EasyDate';
 
 const toString = Object.prototype.toString;

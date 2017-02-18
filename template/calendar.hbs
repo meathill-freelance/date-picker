@@ -1,0 +1,11 @@
+<div class="tqb-calendar-item month-{{year}}-{{month}}">
+  <header>
+    <h4>{{year}}年{{month}}月</h4>
+  </header>
+  <ul>
+    <li class="empty-{{empty}}"></li>
+    {{#each days}}
+      <li class="{{#if disabled}}disabled{{/if}}{{#if today}}today{{/if}}" data-date="{{date}}" data-index="{{index}}"></li>
+    {{/each}}
+  </ul>
+</div>
