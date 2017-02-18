@@ -22,7 +22,8 @@ gulp.task('stylus', () => {
       compress: true
     }))
     .pipe(cleanCSS())
-    .pipe(gulp.dest(DEST + 'css/tqb-date-picker.min.css'));
+    .pipe(rename('tqb-date-picker.min.css'))
+    .pipe(gulp.dest(DEST + 'css/'));
 });
 
 gulp.task('webpack', () => {

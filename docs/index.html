@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>Sample</title>
+  <meta name="viewport" content="initial-scale=1.0,user-scalable=no">
+  <link rel="stylesheet" href="//cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//cdn.staticfile.org/prism/1.6.0/themes/prism.min.css">
+  <link rel="stylesheet" href="css/tqb-date-picker.min.css">
+  <style>
+    pre[class*=language-] {
+      padding: 0 1em;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>天气宝 日期选择组件</h1>
+  <p>这是供天气宝使用的日期选择组件，用在移动设备上。</p>
+  <hr>
+  <h2>使用</h2>
+  <p>本插件会自动初始化页面中含有 `.tqb-date-picker-input` 样式的标签，并将其设置为 `readonly`。使用时只需要引用响应的 CSS、JS 文件即可。</p>
+  <h3>依赖</h3>
+  <ul>
+    <li><a href="//jquery.com/">jQuery</a> >= 3.1.1</li>
+  </ul>
+  <h3>页面中</h3>
+  <pre class="pre-scrollable">
+    <code class="language-html">
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1,user-scalable=no&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;path/to/tqb-date-picker.min.css&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;your/own/css/css.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;input type=&quot;text&quot; class=&quot;tqb-date-picker-input&quot;&gt;
+&lt;script src=&quot;path/to/jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;path/to/tqb-date-picker.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;path/to/your/own/js/js.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+    </code>
+  </pre>
+  <hr>
+  <h2>范例</h2>
+  <p class="form-group">
+    <label>选择单日</label>
+    <input type="text" class="tqb-date-picker-input form-control" placeholder="Click me!" data-scattered="true">
+  </p>
+  <p class="form-group">
+    <label>选择连续日期</label>
+    <input type="text" class="tqb-date-picker-input form-control" placeholder="Click me!">
+  </p>
+  <p class="form-group">
+    <label>选择连续日期，并确认</label>
+    <input type="text" class="tqb-date-picker-input form-control" placeholder="Click me!" data-confirm="true">
+  </p>
+  <p class="form-group">
+    <label>包含默认日期</label>
+    <input type="text" class="tqb-date-picker-input form-control" value="2017-02-13,2017-02-15" data-scattered="true">
+  </p>
+  <p class="form-group">
+    <label>包含默认日期，连续</label>
+    <input type="text" class="tqb-date-picker-input form-control" value="2017-02-13,2017-02-14,2017-02-15">
+  </p>
+</div>
+
+
+<script src="//cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+<script src="//cdn.staticfile.org/prism/1.6.0/prism.min.js"></script>
+<script src="js/tqb-date-picker.min.js"></script>
+</body>
+</html>
