@@ -24,9 +24,9 @@ orange = rgb(254,164,83)
 
     li
       list-style none
-      min-width 14%
+      min-width 14.285714%
       max-width 14.29%
-      flex 1
+      flex 1 1 14.285714%
       text-align center
       line-height 50px
       margin-bottom root-font-size
@@ -37,8 +37,8 @@ orange = rgb(254,164,83)
 
         &.empty-{n}
           counter-reset date
-          flex n
-          min-width 14%*n
+          flex n n 14.285714%*n
+          min-width 14.285714%*n
           max-width 100%
 
           ~ :nth-child(7n + {saturday}),
