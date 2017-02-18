@@ -8,6 +8,18 @@ const toString = Object.prototype.toString;
 function isString(obj) {
   return toString.call(obj) === '[object ' + name + ']';
 }
+function max(array) {
+  let last = array.pop();
+  return array.reduce( (memo, item) => {
+    return memo > item ? memo : item;
+  }, last);
+}
+function min(array) {
+  let last = array.pop();
+  return array.reduce( (memo, item) => {
+    return memo > item ? item : memo;
+  }, last);
+}
 
 export default class DatePicker {
   /**
@@ -25,6 +37,7 @@ export default class DatePicker {
     }
     this.createElement(options);
     this.delegateEvent(options);
+    this.setValue(target.val(), options);
 
     if (options.show) {
       this.show();
@@ -93,6 +106,19 @@ export default class DatePicker {
           this.lastMonth.add('+1m');
         }
       });
+    }
+  }
+
+  setValue(value, options) {
+    let values = value.split(',');
+    values.forEach( value => {
+      this.$el.find('[data-date="' + value + '"]').addClass('select');
+    });
+    if (!options || !options.scattered) {
+      let end = max(values);
+      let start = min(values);
+      this.$el.find('[data-date="' + start + '"]').addClass('start');
+      this.$el.find('[data-date="' + end + '"]').addClass('end');
     }
   }
 
