@@ -10,6 +10,7 @@
   transition all 0.2s
   display flex
   flex-direction column
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 
   &.static
     position static
@@ -27,6 +28,7 @@
   .container
     flex 1
     overflow-y auto
+    -webkit-overflow-scrolling touch
 
 @import "picker/_header.styl"
 @import "picker/_labels.styl"

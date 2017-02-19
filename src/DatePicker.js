@@ -87,7 +87,7 @@ export default class DatePicker {
   delegateEvent(options) {
     let clickHandler = options.scattered ? DatePicker.onClick_scattered : this.onClick;
     this.$el
-      .on('click', 'li:not(.disabled)', clickHandler.bind(this))
+      .on('click', 'li:not(.disabled,.empty)', clickHandler.bind(this))
       .on('click', '.close-button', () => {
         this.$el.addClass('out');
       })

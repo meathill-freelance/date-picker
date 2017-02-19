@@ -13,6 +13,7 @@ $('body').on('click', '.tqb-date-picker-input', function (event) {
   options.show = true;
   picker = new DatePicker(target, options);
   target.data('tqb-date-picker', picker);
+  target.blur();
 });
 
 $('body .tqb-date-picker-input').prop('readonly', true);
