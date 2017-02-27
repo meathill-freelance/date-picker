@@ -1,0 +1,6 @@
+{
+  "bootstrap": "//cdn.staticfile.org/twitter-bootstrap/4.0.0-alpha.6/",
+  "jquery": "//cdn.staticfile.org/jquery/3.1.1/",
+  "tether": "//cdn.staticfile.org/tether/1.4.0/",
+  "prismjs": "//cdn.staticfile.org/prism/1.6.0/"
+}

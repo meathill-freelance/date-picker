@@ -4,9 +4,12 @@
 const path = require('path');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src/main.js'),
+  entry: {
+    'tqb-data-picker': './app/main.js',
+    dev: './app/dev.js'
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {
@@ -21,5 +24,15 @@ module.exports = {
         loader: 'handlebars-loader'
       }
     ]
+  },
+  watch: true,
+  watchOptions: {
+    ignored: /node_modules|dist|build|docs|css/,
+    poll: 1000
+  },
+  resolve: {
+    alias: {
+      config: path.resolve(__dirname, './config/dev.js')
+    }
   }
 };

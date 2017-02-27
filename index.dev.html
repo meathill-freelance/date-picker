@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sample</title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="node_modules/prismjs/themes/prism.css">
+  <link rel="stylesheet" href="css/screen.css">
+  <link rel="stylesheet" href="css/sample.css">
+</head>
+<body>
+<div class="container" id="readme">
+  <!-- readme -->
+</div>
+<section id="sample" class="container">
+  <h2>静态样式</h2>
+  <div class="tqb-date-picker static">
+    <header class="tqb-dp-header">
+      <button type="button" class="close-button">&lt;</button>
+      <h3>今日保障日期</h3>
+      <button type="button" class="confirm-button">确认</button>
+      <ul class="tqb-labels">
+        <li class="sunday">日</li>
+        <li>一</li>
+        <li>二</li>
+        <li>三</li>
+        <li>四</li>
+        <li>五</li>
+        <li class="saturday">六</li>
+      </ul>
+    </header>
+    <div class="tqb-calendar-item month-2017-01">
+      <header>
+        <h4>2017年1月</h4>
+      </header>
+      <ul>
+        <li class="empty-3"></li>
+        <li class="disabled"></li>
+        <li class="disabled"></li>
+        <li class="disabled"></li>
+        <li class="disabled"></li>
+        <li class="disabled"></li>
+        <li class="disabled"></li>
+        <li class="today"></li>
+        <li></li>
+        <li></li>
+        <li class="select start"></li>
+        <li class="select"></li>
+        <li class="select"></li>
+        <li class="select"></li>
+        <li class="select"></li>
+        <li class="select end"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+</section>
+<form class="container">
+  <h2>实例</h2>
+  <p class="form-group">
+    <label>选择单日</label>
+    <input class="form-control tqb-date-picker-input" placeholder="Click me!" data-scattered="true">
+  </p>
+  <p class="form-group">
+    <label>选择连续日期</label>
+    <input class="form-control tqb-date-picker-input" placeholder="Click me!">
+  </p>
+  <p class="form-group">
+    <label>选择连续日期，并确认</label>
+    <input class="form-control tqb-date-picker-input" placeholder="Click me!" data-confirm="true">
+  </p>
+  <p class="form-group">
+    <label>包含默认日期</label>
+    <input class="form-control tqb-date-picker-input" value="2017-02-13,2017-02-15" data-scattered="true">
+  </p>
+  <p class="form-group">
+    <label>包含默认日期，连续</label>
+    <input class="form-control tqb-date-picker-input" value="2017-02-13,2017-02-14,2017-02-15">
+  </p>
+</form>
+
+
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/tether/dist/js/tether.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="node_modules/prismjs/prism.js"></script>
+<script src="dist/tqb-data-picker.bundle.js"></script>
+<script src="dist/dev.bundle.js"></script>
+</body>
+</html>
