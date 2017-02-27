@@ -2,7 +2,7 @@
 
   h3
     text-align center
-    line-height header-height
+    line-height header-height - 1px
     font-size 1.2em
     font-weight normal
     margin 0
@@ -14,13 +14,14 @@
     border none
     color gray
     padding 0
-    height header-height - 2px
-    line-height header-height - 6px
+    height header-height - 1px
+    line-height header-height - 1px
+    width 3em
 
     &:first-child
-      font-size 1.5em
       left 0
-      width 40px
+      background url(../img/chevron-left.svg) .9em center no-repeat
+      background-size 1.2em
 
     &.confirm-button
       right 0

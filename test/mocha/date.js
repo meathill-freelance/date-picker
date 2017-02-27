@@ -2,7 +2,7 @@
  * Created by realm on 2017/2/15.
  */
 const should = require('should');
-const EasyDate = require('.././EasyDate').default;
+const EasyDate = require('../../app/EasyDate').default;
 const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 describe('Date', () => {

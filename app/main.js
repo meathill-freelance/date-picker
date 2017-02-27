@@ -18,3 +18,14 @@ $('body').on('click', '.tqb-date-picker-input', function (event) {
 
 $('body .tqb-date-picker-input').prop('readonly', true);
 window.TQBDatePicker = DatePicker;
+
+if (/micromessenger/i.test(navigator.userAgent) && !('FastClick' in window)) {
+  let script = document.createElement('script');
+  script.async = true;
+  script.src = '//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js';
+  script.onload = () => {
+    alert('fast click ready1');
+    FastClick.attach(document.body);
+  };
+  document.body.appendChild(script);
+}
