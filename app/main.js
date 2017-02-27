@@ -24,7 +24,6 @@ if (/micromessenger/i.test(navigator.userAgent) && !('FastClick' in window)) {
   script.async = true;
   script.src = '//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js';
   script.onload = () => {
-    alert('fast click ready1');
     FastClick.attach(document.body);
   };
   document.body.appendChild(script);
