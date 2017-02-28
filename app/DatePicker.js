@@ -4,23 +4,10 @@
 import template from '../template/picker.hbs';
 import calendar from '../template/calendar.hbs';
 import EasyDate from './EasyDate';
-import RangeDatePicker from './RangeDatePicker';
 
 const toString = Object.prototype.toString;
 function isString(obj) {
   return toString.call(obj) === '[object ' + name + ']';
-}
-function max(array) {
-  let last = array.pop();
-  return array.reduce( (memo, item) => {
-    return memo > item ? memo : item;
-  }, last);
-}
-function min(array) {
-  let last = array.pop();
-  return array.reduce( (memo, item) => {
-    return memo > item ? item : memo;
-  }, last);
 }
 
 export default class DatePicker {
@@ -38,9 +25,12 @@ export default class DatePicker {
    */
   constructor(target, options = {}) {
     this.target = target;
+    if ('multiple' in options) {
+      options.confirm = options.multiple;
+    }
     this.createElement(options);
     this.delegateEvent(options);
-    this.setValue(target.val(), options);
+    this.setValue(target.val());
 
     if (options.show) {
       this.show();
@@ -87,9 +77,8 @@ export default class DatePicker {
   }
 
   delegateEvent(options) {
-    let clickHandler = options.scattered ? DatePicker.onClick_scattered : this.onClick;
     this.$el
-      .on('click', 'li:not(.disabled,.empty)', clickHandler.bind(this))
+      .on('click', 'li:not(.disabled,.empty)', this.onClick.bind(this))
       .on('click', '.close-button', () => {
         this.$el.addClass('out');
       })
@@ -117,12 +106,6 @@ export default class DatePicker {
     values.forEach( value => {
       this.$el.find('[data-date="' + value + '"]').addClass('select');
     });
-    if (!options || !options.scattered) {
-      let end = max(values);
-      let start = min(values);
-      this.$el.find('[data-date="' + start + '"]').addClass('start');
-      this.$el.find('[data-date="' + end + '"]').addClass('end');
-    }
   }
 
   show() {
@@ -137,57 +120,25 @@ export default class DatePicker {
   }
 
   onClick(event) {
-    let start = this.$el.find('.start');
-    let end = this.$el.find('.end');
-    if (start.length && end.length) {
-      start.removeClass('start');
-      end.removeClass('end');
-      this.$el.find('.select').removeClass('select');
-      start = end = null;
-    }
-
     let li = $(event.currentTarget);
-    if ((!start || start.length === 0) && (!end || end.length === 0)) {
-      li.addClass('select start');
-      start = li;
+    if (li.hasClass('select')) {
+      li.removeClass('select');
       return;
     }
 
-    let startIndex = start.data('index');
-    let index = li.data('index');
-    if (startIndex <= index) {
-      li.addClass('select end');
+    if (this.options.multiple) {
+      this.$el.find('.select').removeClass('select');
     } else {
-      start.removeClass('start')
-        .addClass('end');
-      li.addClass('select start');
+      li.addClass('select');
+      if (!this.options.confirm) {
+        this.confirm();
+      }
     }
-    this.$el.find(`li[data-index]`)
-      .slice(Math.min(startIndex, index), Math.max(startIndex, index))
-      .addClass('select');
-    end = li;
-
-    if (!this.options.confirm && start.length && end.length) {
-      this.confirm();
-    }
-  }
-
-  static onClick_scattered(event) {
-    let li = $(event.currentTarget);
-    li.toggleClass('select');
   }
 
   static createMonthObject(current, today, start, end) {
     start = isString(start) ? new EasyDate(start) : start;
     end = isString(end) ? new EasyDate(end) : end;
     return current.toObject(today, start, end);
-  }
-
-  static getInstance(el, options) {
-    if (options.scattered) {
-      return new DatePicker(el, options);
-    } else {
-      return new RangeDatePicker(el, options);
-    }
   }
 };

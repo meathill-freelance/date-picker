@@ -1,7 +1,8 @@
 /**
  * Created by meathill on 2017/2/2.
  */
-import DatePicker from './DatePicker';
+
+import Factory from './Factory';
 
 $('body').on('click', '.tqb-date-picker-input', function (event) {
   let target = $(event.currentTarget);
@@ -14,13 +15,13 @@ $('body').on('click', '.tqb-date-picker-input', function (event) {
     return picker.show();
   }
   options.show = true;
-  picker = DatePicker.getInstance(target, options);
+  picker = Factory.createDatePicker(target, options);
   target.data('tqb-date-picker', picker);
   target.blur();
 });
 
 $('body .tqb-date-picker-input').prop('readonly', true);
-window.TQBDatePicker = DatePicker;
+window.TQBDatePickerFactory = Factory;
 
 if (/micromessenger/i.test(navigator.userAgent) && !('FastClick' in window)) {
   let script = document.createElement('script');

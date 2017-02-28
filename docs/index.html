@@ -11,8 +11,8 @@
 </head>
 <body>
 <div class="container" id="readme">
-  <h1 id="-date-picker">日期选择组件 Date Picker</h1>
-<p>这是供天气宝使用的日期选择组件，用在移动设备上</p>
+  <h1 id="-date-picker">日期选择控件 Date Picker</h1>
+<p>这是供天气宝使用的日期选择控件，用在移动设备上</p>
 <p>A date picker component for 天气宝</p>
 <h2 id="-requirements">需求 Requirements</h2>
 <ul>
@@ -20,8 +20,8 @@
 <li>Mobile Devices</li>
 </ul>
 <h2 id="-installation">安装使用 Installation</h2>
-<p>本插件会自动初始化页面中含有 <code>.tqb-date-picker-input</code> 样式的标签，并将其设置为 <code>readonly</code>。使用时只需要引用响应的 CSS、JS 文件即可。</p>
-<p>本插件会从目标 <code>&lt;input&gt;</code> 的 <code>data-*</code> 属性取初始化数据，目前支持以下参数：</p>
+<p>本控件会自动初始化页面中含有 <code>.tqb-date-picker-input</code> 样式的标签，并将其设置为 <code>readonly</code>。使用时只需要引用响应的 CSS、JS 文件即可。</p>
+<p>本控件会从目标 <code>&lt;input&gt;</code> 的 <code>data-*</code> 属性取初始化数据，目前支持以下参数：</p>
 <table class="table">
 <thead>
 <tr>
@@ -39,6 +39,10 @@
 <td>可选日期是否是不连续的</td>
 </tr>
 <tr>
+<td><code>multiple</code></td>
+<td>不连续日期选择时，是否可选多个日期</td>
+</tr>
+<tr>
 <td><code>start</code></td>
 <td>可选日期范围的起点，默认是今天</td>
 </tr>
@@ -52,6 +56,16 @@
 </tr>
 </tbody>
 </table>
+<h3 id="-">不连续日期</h3>
+<p>选择不连续日期时，每次点击选择一个日期。提交时，将修改 <code>&lt;input&gt;</code> 中的值，为所有选中的日期，用英文逗号（<code>,</code>）相连。</p>
+<h3 id="-">连续时间段</h3>
+<p>选择连续时间段时，本控件会生成两个新的 <code>&lt;input type=&quot;hidden&quot;&gt;</code> ，分别名为 <code>${name}-start</code> 和 <code>${name}-end</code>，用来提交起止日期。另外：</p>
+<ul>
+<li>开始日期，会自动补上 <code>00:00</code>，比如选择 <code>2017-02-28</code>，表单中的值就是 <code>2017-02-28 00:00</code>。</li>
+<li>结束日期，会自动补上 <code>23:59</code>，比如选择 <code>2017-02-28</code>，表单中的值就是 <code>2017-02-28 23:59</code>。</li>
+<li>显示的文本框里的值是 <code>${start} ~ ${end}</code>，这个只用来向用户展示，并不直接提交。</li>
+</ul>
+<h3 id="-">代码范例</h3>
 <pre><code class="lang-html language-html">&lt;!doctype html&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -61,7 +75,11 @@
 &lt;/head&gt;
 &lt;body&gt;
 
-&lt;input type=&quot;text&quot; class=&quot;tqb-date-picker-input&quot;&gt;
+&lt;input type=&quot;text&quot; class=&quot;tqb-date-picker-input&quot;
+    data-scattered=&quot;true&quot; &lt;!-- 选择不连续日期 --&gt;
+    data-start=&quot;2017-06-26&quot; &lt;!-- 可选日期从 2017-06-26 开始 --&gt;
+    data-format=&quot;yyyy-mm-dd&quot; &lt;!-- 日期输出的格式为 yyyy-mm-dd，如 2017-06-26 --&gt;
+    &gt;
 &lt;script src=&quot;path/to/jquery.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;path/to/tqb-date-picker.min.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;path/to/your/own/js/js.js&quot;&gt;&lt;/script&gt;
@@ -78,23 +96,27 @@
   <h2>实例</h2>
   <p class="form-group">
     <label>选择单日</label>
-    <input class="form-control tqb-date-picker-input" placeholder="Click me!" data-scattered="true">
+    <input class="form-control tqb-date-picker-input" placeholder="Click me!" data-scattered="true" name="single-date">
+  </p>
+  <p class="form-group">
+    <label>选择多个单日</label>
+    <input class="form-control tqb-date-picker-input" placeholder="Click me!" data-scattered="true" data-multiple="true" name="single-date-multiple">
   </p>
   <p class="form-group">
     <label>选择连续日期</label>
-    <input class="form-control tqb-date-picker-input" placeholder="Click me!">
+    <input class="form-control tqb-date-picker-input" placeholder="Click me!" name="date-range">
   </p>
   <p class="form-group">
     <label>选择连续日期，并确认</label>
-    <input class="form-control tqb-date-picker-input" placeholder="Click me!" data-confirm="true">
+    <input class="form-control tqb-date-picker-input" placeholder="Click me!" data-confirm="true" name="date-range-with-confirm">
   </p>
   <p class="form-group">
     <label>包含默认日期</label>
-    <input class="form-control tqb-date-picker-input" value="2017-02-13,2017-02-15" data-scattered="true">
+    <input class="form-control tqb-date-picker-input" value="2017-02-13,2017-02-15" data-scattered="true" name="default-date">
   </p>
   <p class="form-group">
     <label>包含默认日期，连续</label>
-    <input class="form-control tqb-date-picker-input" value="2017-02-13,2017-02-14,2017-02-15">
+    <input class="form-control tqb-date-picker-input" value="2017-02-13 ~ 2017-02-15" name="default-date-range">
   </p>
 </form>
 

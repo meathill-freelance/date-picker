@@ -19,6 +19,12 @@ const DEST = 'build/';
 const DOC = 'docs/';
 const CDN = require('./cdn.json');
 
+gulp.task('sourcemap', () => {
+  gulp.src('dist/*.js')
+    .pipe(replace(/\/\/# sourceMap[\S]+/gi, ''))
+    .pipe(gulp.dest('dist/'));
+});
+
 gulp.task('clear', () => {
   return del([DEST, DOC]);
 });

@@ -75,23 +75,27 @@
   <h2>实例</h2>
   <p class="form-group">
     <label>选择单日</label>
-    <input class="form-control tqb-date-picker-input" placeholder="Click me!" data-scattered="true">
+    <input class="form-control tqb-date-picker-input" placeholder="Click me!" data-scattered="true" name="single-date">
+  </p>
+  <p class="form-group">
+    <label>选择多个单日</label>
+    <input class="form-control tqb-date-picker-input" placeholder="Click me!" data-scattered="true" data-multiple="true" name="single-date-multiple">
   </p>
   <p class="form-group">
     <label>选择连续日期</label>
-    <input class="form-control tqb-date-picker-input" placeholder="Click me!">
+    <input class="form-control tqb-date-picker-input" placeholder="Click me!" name="date-range">
   </p>
   <p class="form-group">
     <label>选择连续日期，并确认</label>
-    <input class="form-control tqb-date-picker-input" placeholder="Click me!" data-confirm="true">
+    <input class="form-control tqb-date-picker-input" placeholder="Click me!" data-confirm="true" name="date-range-with-confirm">
   </p>
   <p class="form-group">
     <label>包含默认日期</label>
-    <input class="form-control tqb-date-picker-input" value="2017-02-13,2017-02-15" data-scattered="true">
+    <input class="form-control tqb-date-picker-input" value="2017-02-13,2017-02-15" data-scattered="true" name="default-date">
   </p>
   <p class="form-group">
     <label>包含默认日期，连续</label>
-    <input class="form-control tqb-date-picker-input" value="2017-02-13,2017-02-14,2017-02-15">
+    <input class="form-control tqb-date-picker-input" value="2017-02-13 ~ 2017-02-15" name="default-date-range">
   </p>
 </form>
 
