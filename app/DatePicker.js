@@ -126,13 +126,12 @@ export default class DatePicker {
       return;
     }
 
-    if (this.options.multiple) {
+    if (!this.options.multiple) {
       this.$el.find('.select').removeClass('select');
-    } else {
-      li.addClass('select');
-      if (!this.options.confirm) {
-        this.confirm();
-      }
+    }
+    li.addClass('select');
+    if (!this.options.confirm) {
+      this.confirm();
     }
   }
 
