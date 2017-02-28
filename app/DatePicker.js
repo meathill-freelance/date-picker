@@ -4,6 +4,7 @@
 import template from '../template/picker.hbs';
 import calendar from '../template/calendar.hbs';
 import EasyDate from './EasyDate';
+import RangeDatePicker from './RangeDatePicker';
 
 const toString = Object.prototype.toString;
 function isString(obj) {
@@ -30,15 +31,13 @@ export default class DatePicker {
    *    @param {Boolean|null} options.confirm 是否有确认按钮
    *    @param {Boolean|null} options.show 是否直接显示
    *    @param {Boolean|null} options.scattered 是否选择单日
+   *    @param {Boolean|null} options.multiple 是否可以选择多个日期
    *    @param {String|null} options.start 可选日期范围的起点，默认是今天
    *    @param {String|null} options.end 可选日期范围的终点，为空则没有，即用户可以选择任意时间
    *    @param {String|null} options.format 日期格式，默认为 `yyyy-mm-dd`，无大小写区分
    */
   constructor(target, options = {}) {
     this.target = target;
-    if ('scattered' in options && !('hasConfirm' in options)) {
-      options.confirm = options.scattered;
-    }
     this.createElement(options);
     this.delegateEvent(options);
     this.setValue(target.val(), options);
@@ -71,7 +70,7 @@ export default class DatePicker {
       months: months
     }, options);
     let item = $(template(data));
-    item.appendTo(document.body);
+    item.insertAfter(this.target);
     this.$el = item;
     this.lastMonth = current;
     setTimeout(() => {
@@ -182,5 +181,13 @@ export default class DatePicker {
     start = isString(start) ? new EasyDate(start) : start;
     end = isString(end) ? new EasyDate(end) : end;
     return current.toObject(today, start, end);
+  }
+
+  static getInstance(el, options) {
+    if (options.scattered) {
+      return new DatePicker(el, options);
+    } else {
+      return new RangeDatePicker(el, options);
+    }
   }
 };

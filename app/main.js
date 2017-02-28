@@ -6,12 +6,15 @@ import DatePicker from './DatePicker';
 $('body').on('click', '.tqb-date-picker-input', function (event) {
   let target = $(event.currentTarget);
   let options = target.data();
+  /**
+   * @param {DatePicker|null} options.tqbDatePicker
+   */
   let picker = options.tqbDatePicker;
   if (picker) {
     return picker.show();
   }
   options.show = true;
-  picker = new DatePicker(target, options);
+  picker = DatePicker.getInstance(target, options);
   target.data('tqb-date-picker', picker);
   target.blur();
 });
