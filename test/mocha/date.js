@@ -20,7 +20,13 @@ describe('Date', () => {
   describe('#clone', () => {
     it('should clone date', () => {
       let some = date.clone();
-      should(some.getTime()).equal(date.toDate().getTime());
+      should(some.toDate().getTime()).equal(date.toDate().getTime());
+    });
+
+    it('should clone format', () => {
+      let some = new EasyDate('+1m', { format: 'yyyy$mm$dd'});
+      let another = some.clone();
+      should(some.toString()).equal(another.toString());
     });
   });
 
@@ -44,8 +50,8 @@ describe('Date', () => {
 
   describe('#getMonth', () => {
     it('输出月份，个位数前面自动补0', () => {
-      should(EasyDate.toMonth(10)).equal('11');
-      should(EasyDate.toMonth(8)).equal('09');
+      should(EasyDate.toDouble(11)).equal('11');
+      should(EasyDate.toDouble(9)).equal('09');
     });
   });
 

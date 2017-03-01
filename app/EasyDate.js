@@ -95,7 +95,7 @@ class EasyDate {
       });
   }
 
-  static getDates(date, today, start, end, format) {
+  static getDates(date, today, start, end, format = defaultFormat) {
     let month = date.getMonth();
     date = new Date(date);
     date.setDate(1);
