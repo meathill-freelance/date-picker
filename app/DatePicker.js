@@ -4,11 +4,7 @@
 import template from '../template/picker.hbs';
 import calendar from '../template/calendar.hbs';
 import EasyDate from './EasyDate';
-
-const toString = Object.prototype.toString;
-function isString(obj) {
-  return toString.call(obj) === '[object ' + name + ']';
-}
+import {isString} from './utils';
 
 export default class DatePicker {
   /**

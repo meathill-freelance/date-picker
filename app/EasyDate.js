@@ -1,7 +1,6 @@
 /**
  * Created by realm on 2017/2/15.
  */
-
 const METHODS = {
   m: 'Month',
   d: 'Date'
@@ -11,8 +10,9 @@ const defaultFormat = 'yyyy-mm-dd';
 class EasyDate {
   constructor(offset, options = {}) {
     this.format = options.format || defaultFormat;
-    if (EasyDate.isDate(offset, this.format)) {
-      this.base = new Date(offset);
+    let date = EasyDate.isDate(offset, this.format);
+    if (date) {
+      this.base = new Date(date);
       return;
     }
     if (offset instanceof Date) {
@@ -113,11 +113,29 @@ class EasyDate {
   }
 
   static isDate(string, format) {
-    format = format.replace(/[ymd]+/gi, match => {
-      return '\\d{' + match.length + '}';
+    string = string.toString();
+    let pos = [];
+    let regexps = [/d+/gi, /y+/gi, /m+/gi];
+    regexps.forEach( regexp => {
+      format = format.replace(regexp, match => {
+        pos.push(match.substr(0, 1));
+        return '(\\d{' + match.length + '})';
+      });
     });
     let regexp = new RegExp('^' + format + '$');
-    return regexp.test(string);
+    let check = string.match(regexp);
+    if (!check) {
+      return check;
+    }
+    let result = {
+      y: '',
+      m: '',
+      d: ''
+    };
+    pos.forEach( (key, i) => {
+      result[key] = check[i + 1];
+    });
+    return `${result.y}-${result.m}-${result.d}`;
   }
 
   static isLeapYear(year) {
