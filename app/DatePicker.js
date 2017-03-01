@@ -40,9 +40,9 @@ export default class DatePicker {
 
   createElement(options) {
     let today = new EasyDate(0, options);
-    let start = options.start ? new EasyDate(options.start) : today;
-    let end = options.end ? new EasyDate(options.end) : null;
-    let range = end || new EasyDate('+1m');
+    let start = options.start ? new EasyDate(options.start, options) : today;
+    let end = options.end ? new EasyDate(options.end, options) : null;
+    let range = end || new EasyDate('+1m', options);
     let current = start.clone();
     let months = [];
     let counter = 0;

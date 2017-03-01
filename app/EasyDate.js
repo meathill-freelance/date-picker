@@ -41,7 +41,9 @@ class EasyDate {
   }
 
   clone() {
-    return new EasyDate(this.base);
+    return new EasyDate(this.base, {
+      format: this.format
+    });
   }
 
   getDay() {
