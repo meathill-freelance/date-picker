@@ -21,6 +21,7 @@ export default class DatePicker {
    */
   constructor(target, options = {}) {
     this.target = target;
+    this.counter = 0;
     if ('multiple' in options) {
       options.confirm = options.multiple;
     }
@@ -35,21 +36,14 @@ export default class DatePicker {
   }
 
   createElement(options) {
-    let today = new EasyDate(0, options);
-    let start = options.start ? new EasyDate(options.start, options) : today;
-    let end = options.end ? new EasyDate(options.end, options) : null;
-    let range = end || new EasyDate('+1m', options);
+    let today = options.today = new EasyDate(0, options);
+    let start = options.start = options.start ? new EasyDate(options.start, options) : today;
+    let end = options.end = options.end ? new EasyDate(options.end, options) : null;
     let current = start.clone();
     let months = [];
-    let counter = 0;
-    while (current <= range) {
-      let month = DatePicker.createMonthObject(current, today, start, end);
-      month.days = month.days.map( (item, i) => {
-        item['index'] = counter + i;
-        return item;
-      });
+    for (let i = 0; i< 2; i++) { // 默认画两个月
+      let month = this.createMonthObject(current, today, start, end);
       months.push(month);
-      counter += month.days.length;
       current.add('1m');
     }
     let data = Object.assign({
@@ -62,6 +56,16 @@ export default class DatePicker {
     setTimeout(() => {
       item.removeClass('out');
     }, 10);
+  }
+
+  createMonthObject(current, today, start, end) {
+    let month = current.toObject(today, start, end);
+    month.days = month.days.map( (item, i) => {
+      item['index'] = this.counter + i;
+      return item;
+    });
+    this.counter += month.days.length;
+    return month;
   }
 
   confirm() {
@@ -85,16 +89,14 @@ export default class DatePicker {
         this.$el.toggleClass('hide', this.$el.hasClass('out'));
       });
 
-    if (!options.end) {
-      this.$el.find('.container').on('scroll', event => {
-        let container = event.target;
-        if (container.scrollHeight - container.scrollTop <= container.offsetHeight + 10) {
-          let item = calendar(this.lastMonth.toObject());
-          $(container).append(item);
-          this.lastMonth.add('+1m');
-        }
-      });
-    }
+    this.$el.find('.container').on('scroll', event => {
+      let container = event.target;
+      if (container.scrollHeight - container.scrollTop <= container.offsetHeight + 10) {
+        let item = calendar(this.createMonthObject(this.lastMonth, options.today, options.start, options.end));
+        $(container).append(item);
+        this.lastMonth.add('+1m');
+      }
+    });
   }
 
   setValue(value, options) {
@@ -129,11 +131,5 @@ export default class DatePicker {
     if (!this.options.confirm) {
       this.confirm();
     }
-  }
-
-  static createMonthObject(current, today, start, end) {
-    start = isString(start) ? new EasyDate(start) : start;
-    end = isString(end) ? new EasyDate(end) : end;
-    return current.toObject(today, start, end);
   }
 };

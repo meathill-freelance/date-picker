@@ -38,6 +38,7 @@ class EasyDate {
         this.base['set' + method](this.base['get' + method]() + offset[key]);
       }
     }
+    return this;
   }
 
   clone() {
