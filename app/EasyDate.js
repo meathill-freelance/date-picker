@@ -117,24 +117,24 @@ class EasyDate {
     string = string.toString();
     let pos = [];
     let regexps = [/d+/gi, /y+/gi, /m+/gi];
+    let origin = format;
     regexps.forEach( regexp => {
       format = format.replace(regexp, match => {
         pos.push(match.substr(0, 1));
         return '(\\d{' + match.length + '})';
       });
     });
-    let regexp = new RegExp('^' + format + '$');
+    let regexp = new RegExp(`^${format}$`);
     let check = string.match(regexp);
     if (!check) {
       return check;
     }
-    let result = {
-      y: '',
-      m: '',
-      d: ''
-    };
-    pos.forEach( (key, i) => {
-      result[key] = check[i + 1];
+    let result = { };
+    ['y', 'm', 'd'].forEach(key => {
+      let regexp = new RegExp(`${key}+`, 'gi');
+      origin.replace(regexp, (match, i) => {
+        result[key] = string.substr(i, match.length);
+      });
     });
     return `${result.y}-${result.m}-${result.d}`;
   }
