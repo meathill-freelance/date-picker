@@ -70,9 +70,12 @@ orange = rgb(254,164,83)
 
       &.select
         &.start
-          background radial-gradient(circle at center, aqua 0, aqua 68%,transparent 68%, transparent 100%), linear-gradient(to right, transparent 0, transparent 50%, alpha(aqua, .5) 50%, alpha(aqua, .5) 50%)
+          background radial-gradient(circle at center, aqua 0, aqua 68%,transparent 68%, transparent 100%)
 
-        &.end
+          &.tails
+            background radial-gradient(circle at center, aqua 0, aqua 68%,transparent 68%, transparent 100%), linear-gradient(to right, transparent 0, transparent 50%, alpha(aqua, .5) 50%, alpha(aqua, .5) 50%)
+
+        &.end:not(.start)
           background radial-gradient(circle at center, aqua 0, aqua 68%,transparent 68%, transparent 100%), linear-gradient(to right, alpha(aqua, .5) 0, alpha(aqua, .5) 50%, transparent 50%, transparent 50%)
 
 .scattered .select

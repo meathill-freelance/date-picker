@@ -59,7 +59,7 @@ class RangeDatePicker extends DatePicker {
     let start = this.$el.find('.start');
     let end = this.$el.find('.end');
     if (start.length && end.length) {
-      start.removeClass('start');
+      start.removeClass('start tails');
       end.removeClass('end');
       this.$el.find('.select').removeClass('select');
       start = end = null;
@@ -76,10 +76,13 @@ class RangeDatePicker extends DatePicker {
     let index = li.data('index');
     if (startIndex <= index) {
       li.addClass('select end');
+      if (startIndex < index) {
+        start.addClass('tails');
+      }
     } else {
-      start.removeClass('start')
+      start.removeClass('start tails')
         .addClass('end');
-      li.addClass('select start');
+      li.addClass('select start tails');
     }
     this.$el.find(`li[data-index]`)
       .slice(Math.min(startIndex, index), Math.max(startIndex, index))
