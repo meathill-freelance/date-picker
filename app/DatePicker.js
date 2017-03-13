@@ -4,7 +4,7 @@
 import template from '../template/picker.hbs';
 import calendar from '../template/calendar.hbs';
 import EasyDate from './EasyDate';
-import {isString} from './utils';
+import utils from './utils';
 
 export default class DatePicker {
   /**
@@ -22,6 +22,7 @@ export default class DatePicker {
   constructor(target, options = {}) {
     this.target = target;
     this.counter = 0;
+    this.range = utils.getRange(options);
     if ('multiple' in options) {
       options.confirm = options.multiple;
     }
@@ -107,6 +108,17 @@ export default class DatePicker {
   }
 
   show() {
+    let options = this.target.data();
+    let range = utils.getRange(options);
+    if (range != this.range) {
+      this.$el.remove();
+      this.createElement(options);
+      this.delegateEvent(options);
+      this.setValue(this.target.val());
+      this.options = options;
+      this.range = range;
+      return;
+    }
     this.$el.removeClass('hide');
     setTimeout(() => {
       this.$el.removeClass('out');

@@ -5,6 +5,11 @@
 const toString = Object.prototype.toString;
 
 module.exports = {
+  getRange(options) {
+    let start = options.start || '';
+    let end = options.end || '';
+    return `${start}_${end}`;
+  },
   isString(obj) {
     return toString.call(obj) === '[object ' + name + ']';
   }
