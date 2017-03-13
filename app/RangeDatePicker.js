@@ -29,6 +29,7 @@ class RangeDatePicker extends DatePicker {
   }
 
   createElement(options) {
+    this.counter = 0;
     super.createElement(options);
 
     let targetName = this.target.attr('name');
@@ -42,6 +43,16 @@ class RangeDatePicker extends DatePicker {
     input.name = targetName + '-' + pos;
     $(input).insertAfter(this.target);
     return input;
+  }
+
+  createMonthObject(current, today, start, end) {
+    let month = super.createMonthObject(current, today, start, end);
+    month.days = month.days.map( (item, i) => {
+      item['index'] = this.counter + i;
+      return item;
+    });
+    this.counter += month.days.length;
+    return month;
   }
 
   setValue(value) {

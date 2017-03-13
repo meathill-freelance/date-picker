@@ -21,7 +21,6 @@ export default class DatePicker {
    */
   constructor(target, options = {}) {
     this.target = target;
-    this.counter = 0;
     this.range = utils.getRange(options);
     if ('multiple' in options) {
       options.confirm = options.multiple;
@@ -29,14 +28,11 @@ export default class DatePicker {
     this.createElement(options);
     this.delegateEvent(options);
     this.setValue(target.val());
-
-    if (options.show) {
-      this.show();
-    }
     this.options = options;
   }
 
   createElement(options) {
+    options = Object.assign({}, options);
     let today = options.today = new EasyDate(0, options);
     let start = options.start = options.start ? new EasyDate(options.start, options) : today;
     let end = options.end = options.end ? new EasyDate(options.end, options) : null;
@@ -47,26 +43,20 @@ export default class DatePicker {
       months.push(month);
       current.add('1m');
     }
-    let data = Object.assign({
-      months: months
-    }, options);
-    let item = $(template(data));
+    options.months = months;
+    let item = $(template(options));
     item.insertAfter(this.target);
     this.$el = item;
     this.lastMonth = current;
-    setTimeout(() => {
-      item.removeClass('out');
-    }, 10);
+    if (options.show) {
+      setTimeout(() => {
+        item.removeClass('out');
+      }, 10);
+    }
   }
 
   createMonthObject(current, today, start, end) {
-    let month = current.toObject(today, start, end);
-    month.days = month.days.map( (item, i) => {
-      item['index'] = this.counter + i;
-      return item;
-    });
-    this.counter += month.days.length;
-    return month;
+    return current.toObject(today, start, end);
   }
 
   confirm() {
