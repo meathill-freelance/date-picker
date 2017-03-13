@@ -59,7 +59,7 @@ class RangeDatePicker extends DatePicker {
     let values = value.split(/[\s,~]+/);
     let end = max(values);
     let start = min(values);
-    start = this.$el.find(`[data-date="${start}"]`).addClass('start').data('index');
+    start = this.$el.find(`[data-date="${start}"]`).addClass('start tails').data('index');
     end = this.$el.find(`[data-date="${end}"]`).addClass('end').data('index');
     for (; start <= end; start++) {
       this.$el.find(`[data-index=${start}]`).addClass('select');
