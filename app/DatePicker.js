@@ -48,6 +48,9 @@ export default class DatePicker {
     item.insertAfter(this.target);
     this.$el = item;
     this.lastMonth = current;
+    if (options.fixCalendarContainer) {
+      this.$el.find('.tqb-dp-container').height($(window).height() - 105);
+    }
     if (options.show) {
       setTimeout(() => {
         item.removeClass('out');
@@ -70,17 +73,17 @@ export default class DatePicker {
   delegateEvent(options) {
     this.$el
       .on('click', 'li:not(.disabled,.empty)', this.onClick.bind(this))
-      .on('click', '.close-button', () => {
+      .on('click', '.tqb-dp-close-button', () => {
         this.$el.addClass('out');
       })
-      .on('click', '.confirm-button', () => {
+      .on('click', '.tqb-dp-confirm-button', () => {
         this.confirm();
       })
       .on('transitionend', () => {
         this.$el.toggleClass('hide', this.$el.hasClass('out'));
       });
 
-    this.$el.find('.container').on('scroll', event => {
+    this.$el.find('.tqb-dp-container').on('scroll', event => {
       let container = event.target;
       if (container.scrollHeight - container.scrollTop <= container.offsetHeight + 10) {
         let item = calendar(this.createMonthObject(this.lastMonth, options.today, options.start, options.end));

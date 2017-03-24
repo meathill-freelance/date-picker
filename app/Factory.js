@@ -10,6 +10,7 @@ import RangeDatePicker from './RangeDatePicker';
 
 export default {
   createDatePicker(el, options) {
+    options.fixCalendarContainer = this.fixCalendarContainer;
     if ('scattered' in options && options.scattered) {
       return new DatePicker(el, options);
     } else {
