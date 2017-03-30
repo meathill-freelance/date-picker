@@ -37,6 +37,7 @@ export default class DatePicker {
     let start = options.start = options.start ? new EasyDate(options.start, options) : today;
     let end = options.end = options.end ? new EasyDate(options.end, options) : null;
     let current = start.clone();
+    current.setDate(1);
     let months = [];
     for (let i = 0; i< 2; i++) { // 默认画两个月
       let month = this.createMonthObject(current, today, start, end);
