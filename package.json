@@ -1,6 +1,6 @@
 {
   "name": "tqb-component-date-picker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a date picker component for 天气宝",
   "main": "index.js",
   "directories": {
