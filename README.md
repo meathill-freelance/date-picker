@@ -5,6 +5,8 @@
 
 A date picker component for 天气宝
 
+[GitHub](https://github.com/meathill-freelance/date-picker)
+
 ## 需求 Requirements
 
 * [jQuery](https://jquery.com) >=3.1.1

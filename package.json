@@ -1,5 +1,5 @@
 {
-  "name": "date-picker",
+  "name": "tqb-component-date-picker",
   "version": "1.0.0",
   "description": "a date picker component for 天气宝",
   "main": "index.js",
@@ -21,6 +21,14 @@
   "dependencies": {
     "jquery": "^3.1.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meathill-freelance/date-picker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/meathill-freelance/date-picker/issues"
+  },
+  "homepage": "https://meathill-freelance.github.io/date-picker/",
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-core": "^6.24.0",
