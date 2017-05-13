@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="node_modules/prismjs/themes/prism.css">
   <link rel="stylesheet" href="css/screen.css">
   <link rel="stylesheet" href="css/sample.css">
+  <link rel="stylesheet" href="css/blue.css">
 </head>
 <body>
 <div class="container" id="readme">
@@ -16,14 +17,14 @@
 <section id="sample" class="container">
   <h2>静态样式</h2>
   <div class="static-container">
-    <div class="tqb-date-picker static">
+    <div class="tqb-date-picker continuous static">
       <header class="tqb-dp-header">
         <button type="button" class="tqb-dp-close-button"></button>
         <h3>今日保障日期</h3>
         <button type="button" class="tqb-dp-confirm-button">确认</button>
         <div class="tqb-dp-selected">
-          <label class="start">5月1日</label>
-          <label class="end">5月2日</label>
+          <label class="start-date"></label>
+          <label class="end-date"></label>
         </div>
         <ul class="tqb-dp-labels">
           <li class="sunday">日</li>
@@ -115,6 +116,14 @@
     <label>动态变更日期范围</label>
     <input class="form-control tqb-date-picker-input" data-start="2017-03-01" data-end="2017-03-31" placeholder="动态变更日期范围" name="data-range-dynamic">
   </p>
+  <div class="form-group">
+    <label>用两个 <code>&lt;label&gt;</code> 显示选择的日期</label>
+    <input type="hidden" data-label-filter-start="{m}月{d}日 00:00起" data-label-filter-end="{m}月{d}日 23:59止" name="date-label" id="date-label" data-confirm="true">
+    <div class="btn-group btn-block" role="group">
+      <label class="tqb-date-picker-label btn btn-secondary start col-sm-6" for="date-label">开始日期</label>
+      <label class="tqb-date-picker-label btn btn-secondary end col-sm-6" for="date-label">结束日期</label>
+    </div>
+  </div>
 </form>
 
 

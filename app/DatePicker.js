@@ -18,6 +18,8 @@ export default class DatePicker {
    *    @param {String|null} options.start 可选日期范围的起点，默认是今天
    *    @param {String|null} options.end 可选日期范围的终点，为空则没有，即用户可以选择任意时间
    *    @param {String|null} options.format 日期格式，默认为 `yyyy-mm-dd`，无大小写区分
+   *    @param {String|null} options.labelFilterStart 输出到开始日期 <label> 里的格式
+   *    @param {String|null} options.labelFilterEnd 输出到结束日期 <label> 里的格式
    */
   constructor(target, options = {}) {
     this.target = target;
@@ -104,7 +106,7 @@ export default class DatePicker {
   show() {
     let options = this.target.data();
     let range = utils.getRange(options);
-    if (range != this.range) {
+    if (range !== this.range) {
       this.$el.remove();
       this.createElement(options);
       this.delegateEvent(options);

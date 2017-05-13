@@ -19,12 +19,28 @@ function min(array) {
 
 class RangeDatePicker extends DatePicker {
 
+  constructor(target, options) {
+    super(target, options);
+
+    this.startDate = this.$el.find('.start-date');
+    this.endDate = this.$el.find('.end-date');
+    let labels = $(`[for=${this.target[0].id}].tqb-date-picker-label`);
+    if (labels.length) {
+      this.startLabel = labels.filter('.start');
+      this.endLabel = labels.filter('.end');
+    }
+  }
+
   confirm() {
     let start = this.$el.find('.start').data('date');
     let end = this.$el.find('.end').data('date');
     this.start.value = start + ' 00:00';
     this.end.value = end + ' 23:59';
     this.target.val(`${start} ~ ${end}`);
+    if (this.startLabel) {
+      this.startLabel.text(RangeDatePicker.formatDate(start, this.options.labelFilterStart));
+      this.endLabel.text(RangeDatePicker.formatDate(end, this.options.labelFilterEnd));
+    }
     this.hide();
   }
 
@@ -80,6 +96,7 @@ class RangeDatePicker extends DatePicker {
     if ((!start || start.length === 0) && (!end || end.length === 0)) {
       li.addClass('select start');
       start = li;
+      this.startDate.text(RangeDatePicker.formatDate(start.data('date')));
       return;
     }
 
@@ -99,10 +116,18 @@ class RangeDatePicker extends DatePicker {
       .slice(Math.min(startIndex, index), Math.max(startIndex, index))
       .addClass('select');
     end = li;
+    this.startDate.text(RangeDatePicker.formatDate(start.data('date')));
+    this.endDate.text(RangeDatePicker.formatDate(end.data('date')));
 
     if (!this.options.confirm && start.length && end.length) {
       this.confirm();
     }
+  }
+
+  static formatDate(date, filter = '{m}月{d}日') {
+    let ymd = date.split('-');
+    return filter.replace(/{m+}/, Number(ymd[1]).toString())
+      .replace(/{d+}/, Number(ymd[2]).toString());
   }
 }
 

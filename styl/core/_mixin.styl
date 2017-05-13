@@ -1,0 +1,6 @@
+mCircle(color, bgColor = white, $radius = 25px)
+  radial-gradient(circle at center, color 0, color $radius - 1px, bgColor $radius, bgColor 100%)
+
+mBar(color, dir)
+  color = alpha(color, 0.5)
+  linear-gradient(to unquote(dir), transparent 0, transparent 50%, color 50%, color 100%)

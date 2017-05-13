@@ -26,6 +26,8 @@ A date picker component for 天气宝
 | `start` | 可选日期范围的起点，默认是今天 |
 | `end` | 可选日期范围的终点，为空则没有，即用户可以选择任意时间 |
 | `format` | 日期格式，默认为 `yyyy-mm-dd`，无大小写区分 |
+| `labelFilterStart` | 输出到开始日期 <label> 里的日期格式 |
+| `labelFilterEnd` | 输出到结束日期 <label> 里的日期格式 |
 
 ### 不连续日期
 

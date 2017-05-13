@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="//cdn.staticfile.org/prism/1.6.0/themes/prism.css">
   <link rel="stylesheet" href="css/tqb-date-picker.min.css">
   <link rel="stylesheet" href="css/sample.css">
+  <link rel="stylesheet" href="css/blue.css">
 </head>
 <body>
 <div class="container" id="readme">
@@ -54,6 +55,14 @@
 <tr>
 <td><code>format</code></td>
 <td>日期格式，默认为 <code>yyyy-mm-dd</code>，无大小写区分</td>
+</tr>
+<tr>
+<td><code>labelFilterStart</code></td>
+<td>输出到开始日期 <label> 里的日期格式</td>
+</tr>
+<tr>
+<td><code>labelFilterEnd</code></td>
+<td>输出到结束日期 <label> 里的日期格式</td>
 </tr>
 </tbody>
 </table>
@@ -131,6 +140,14 @@
     <label>动态变更日期范围</label>
     <input class="form-control tqb-date-picker-input" data-start="2017-03-01" data-end="2017-03-31" placeholder="动态变更日期范围" name="data-range-dynamic">
   </p>
+  <div class="form-group">
+    <label>用两个 <code>&lt;label&gt;</code> 显示选择的日期</label>
+    <input type="hidden" data-label-filter-start="{m}月{d}日 00:00起" data-label-filter-end="{m}月{d}日 23:59止" name="date-label" id="date-label" data-confirm="true">
+    <div class="btn-group btn-block" role="group">
+      <label class="tqb-date-picker-label btn btn-secondary start col-sm-6" for="date-label">开始日期</label>
+      <label class="tqb-date-picker-label btn btn-secondary end col-sm-6" for="date-label">结束日期</label>
+    </div>
+  </div>
 </form>
 
 

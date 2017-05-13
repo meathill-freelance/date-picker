@@ -1,0 +1,16 @@
+pre[class*=language-] {
+  padding: 0 1em;
+}
+#sample {
+  margin-bottom: 2rem;
+}
+.static-container {
+  border: 1px solid #aaa;
+  height: 677px;
+}
+.tqb-date-picker-input {
+  border: 1px solid #aaa;
+  padding: 0.3em 0.5em;
+  border-radius: 4px;
+}
+/*# sourceMappingURL=sample.css.map */

@@ -1,0 +1,38 @@
+@import "../core/_mixin.styl"
+
+brand-color = #5975EB
+
+.tqb-date-picker
+  .tqb-dp-selected label
+    &.start-date
+      &:empty,
+      &.active
+        background-color brand-color
+
+      &:not(:empty)
+        + :empty,
+        + .active
+          background-color brand-color
+
+  .tqb-dp-calendar-item
+    header h4
+      color brand-color
+
+    li.select
+      &.start
+        color white
+        background mCircle(brand-color)
+
+        &.tails
+          background mBar(brand-color, 'right'),mCircle(brand-color)
+
+      &.end:not(.start)
+        color white
+        background mBar(brand-color, 'left'),mCircle(brand-color)
+
+  &.scattered .select
+    background mCircle(brand-color)
+    color white
+
+  &.continuous .select
+    background alpha(brand-color, .5)

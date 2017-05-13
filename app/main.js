@@ -4,9 +4,17 @@
 
 import Factory from './Factory';
 
-$('body').on('click', '.tqb-date-picker-input', function (event) {
-  let target = $(event.currentTarget);
+$('body').on('click', '.tqb-date-picker-input,.tqb-date-picker-label', function (event) {
+  let target;
+  let labelFor;
+  if (event.currentTarget.tagName.toLowerCase() === 'label') {
+    labelFor = event.currentTarget.htmlFor;
+    target = $(`#${labelFor}`);
+  } else {
+    target = $(event.currentTarget);
+  }
   let options = target.data();
+  options.isStart = labelFor && $(event.currentTarget).hasClass('start');
   /**
    * @param {DatePicker|null} options.tqbDatePicker
    */

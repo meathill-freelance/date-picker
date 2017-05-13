@@ -40,6 +40,15 @@ gulp.task('stylus', () => {
     .pipe(gulp.dest(DEST + 'css/'));
 });
 
+gulp.task('theme', () => {
+  return gulp.src('./styl/theme/*.styl')
+    .pipe(stylus({
+      compress: true
+    }))
+    .pipe(cleanCSS())
+    .pipe(gulp.dest(DEST + 'css/'));
+})
+
 gulp.task('webpack', () => {
   return gulp.src('app/main.js')
     .pipe(webpack( require('./webpack.config.build')))
@@ -73,7 +82,7 @@ gulp.task('copy', () => {
 
 gulp.task('default', callback => {
   sequence('clear',
-    ['stylus', 'webpack', 'html'],
+    ['stylus', 'theme', 'webpack', 'html'],
     'copy',
     callback
   );

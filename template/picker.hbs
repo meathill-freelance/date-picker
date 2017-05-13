@@ -5,6 +5,12 @@
     {{#if confirm}}
       <button type="button" class="tqb-dp-confirm-button">确定</button>
     {{/if}}
+    {{#unless scattered}}
+    <div class="tqb-dp-selected">
+      <label class="start-date {{#if isStart}}active{{/if}}"></label>
+      <label class="end-date {{#unless isStart}}active{{/unless}}"></label>
+    </div>
+    {{/unless}}
     <ul class="tqb-dp-labels">
       <li class="sunday">日</li>
       <li>一</li>

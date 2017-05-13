@@ -11,24 +11,30 @@
     color white
     text-align center
     height 50px
+    margin-bottom 0
 
-    &.start
+    &.start-date
 
-      &:empty::before
-        content '选择开始时间'
+      &:empty,
+      &.active
+        background-color brand-color
+
+        &::before
+          content '选择开始时间'
 
       &:not(:empty)
         &::before
           content '开始时间'
 
-        + label:empty::before
-          content '选择结束时间'
+        + :empty,
+        + .active
+          background-color brand-color
 
-    &.end::before
-        content '结束时间'
+          &::before
+            content '选择结束时间'
 
-    &:empty
-      background-color brand-color
+    &.end-date::before
+      content '结束时间'
 
 .tqb-dp-labels
   border-top 1px solid gray-border
