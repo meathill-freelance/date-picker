@@ -20,7 +20,7 @@ $('body').on('click', '.tqb-date-picker-input', function (event) {
   target.blur();
 });
 
-$('body .tqb-date-picker-input').prop('readonly', true);
+$('.tqb-date-picker-input').prop('readonly', true);
 window.TQBDatePickerFactory = Factory;
 
 if (/\bmicromessenger\b/i.test(navigator.userAgent) && !('FastClick' in window)) {

@@ -5,6 +5,7 @@
   left 0
   right 0
   bottom 0
+  color black
   font-size root-font-size
   z-index 1024
   transition all 0.2s
@@ -15,9 +16,6 @@
   &.static
     position relative
     width 100%
-    max-width 375px
-    height 667px
-    border 1px solid border-color
 
   &.hide
     display none !important
@@ -31,6 +29,6 @@
     overflow-y auto
     -webkit-overflow-scrolling touch
 
-@import "picker/_header.styl"
-@import "picker/_labels.styl"
-@import "picker/_calendar.styl"
+  @import "picker/_header.styl"
+  @import "picker/_labels.styl"
+  @import "picker/_calendar.styl"

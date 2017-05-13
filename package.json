@@ -10,7 +10,7 @@
     "test": "mocha test/mocha/date.js",
     "build": "gulp",
     "watch:js": "webpack",
-    "watch:stylus": "stylus -w styl/screen.styl -o css/ --sourcemap"
+    "watch:stylus": "stylus -w styl/*.styl -o css/ --sourcemap"
   },
   "keywords": [
     "date picker",

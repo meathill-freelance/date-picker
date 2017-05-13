@@ -1,7 +1,37 @@
-red = rgb(251,173,103)
+.tqb-dp-selected
+  display flex
 
-.tqb-date-picker .tqb-dp-labels
-  border-top 1px solid silver
+  label
+    display flex
+    flex-direction column
+    justify-content center
+    line-height 1.25
+    width 50%
+    background-color #BBB
+    color white
+    text-align center
+    height 50px
+
+    &.start
+
+      &:empty::before
+        content '选择开始时间'
+
+      &:not(:empty)
+        &::before
+          content '开始时间'
+
+        + label:empty::before
+          content '选择结束时间'
+
+    &.end::before
+        content '结束时间'
+
+    &:empty
+      background-color brand-color
+
+.tqb-dp-labels
+  border-top 1px solid gray-border
   background-color gray-background
   padding-left 0
   margin 0
@@ -18,4 +48,4 @@ red = rgb(251,173,103)
     
     &.sunday,
     &.saturday
-      color red
+      color orange

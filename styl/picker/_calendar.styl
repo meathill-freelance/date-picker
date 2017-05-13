@@ -1,15 +1,15 @@
-border-color = rgb(238,238,238)
-point-radius = 6px
-red = rgb(254,156,68)
-orange = rgb(254,164,83)
+$radius = date-height / 2
+$circle = radial-gradient(circle at center, brand-color 0, brand-color $radius - 1px,transparent $radius, transparent 100%)
+$right = linear-gradient(to right, transparent 0, transparent 50%, alpha(brand-color, 0.5) 50%, alpha(brand-color, 0 .5) 50%)
+$left = linear-gradient(to right, alpha(brand-color, .5) 0, alpha(brand-color, .5) 50%, transparent 50%, transparent 50%)
 
-.tqb-date-picker .tqb-dp-calendar-item
+.tqb-dp-calendar-item
   header
-    border-bottom 1px solid border-color
+    border-bottom 1px solid gray-background
     margin-bottom root-font-size
 
     h4
-      color aqua
+      color brand-color
       text-align center
       margin 0
       line-height 3.25
@@ -20,66 +20,66 @@ orange = rgb(254,164,83)
     flex-wrap wrap
     margin 0
     padding 0
-    border-bottom 1px solid border-color
+    border-bottom 1px solid gray-background
 
-    li
-      list-style none
-      min-width 14.285714%
-      max-width 14.29%
-      flex 1 1 14.285714%
-      text-align center
-      line-height 50px
-      margin-bottom root-font-size
+  li
+    list-style none
+    min-width 14.285714%
+    max-width 14.29%
+    flex 1 1 14.285714%
+    text-align center
+    line-height date-height
+    margin-bottom root-font-size
 
-      for n in (0..6)
-        saturday = 8 - n
-        sunday = 9 - n
+    for n in (0..6)
+      saturday = 8 - n
+      sunday = 9 - n
 
-        &.empty-{n}
-          counter-reset date
-          flex n n 14.285714%*n
-          min-width 14.285714%*n
-          max-width 100%
+      &.empty-{n}
+        counter-reset date
+        flex n n 14.285714%*n
+        min-width 14.285714%*n
+        max-width 100%
 
-          ~ :nth-child(7n + {saturday}),
-          ~ :nth-child(7n + {sunday})
-            color orange
+        ~ :nth-child(7n + {saturday}),
+        ~ :nth-child(7n + {sunday})
+          color orange
 
-      &:not(:first-child):before
-        content counter(date)
-        counter-increment date
+    &:not(:first-child):before
+      content counter(date)
+      counter-increment date
 
-      &.disabled
-        color gray
+    &.disabled
+      color gray !important
 
-      &.today
-        position relative
+    &.today
+      position relative
 
-        &:after
-          content: ''
-          position absolute
-          width point-radius
-          height point-radius
-          line-height point-radius
-          font-size point-radius
-          background-color red
-          border-radius 50%
-          left 50%
-          margin-left -(point-radius / 2)
-          bottom .5em
+      &:after
+        content: ''
+        position absolute
+        width point-radius
+        height point-radius
+        line-height point-radius
+        font-size point-radius
+        background-color orange
+        border-radius 50%
+        left 50%
+        margin-left -point-radius / 2
+        bottom .5em
 
-      &.select
-        &.start
-          background radial-gradient(circle at center, aqua 0, aqua 68%,transparent 68%, transparent 100%)
+    &.select
+      &.start
+        background $circle
 
-          &.tails
-            background radial-gradient(circle at center, aqua 0, aqua 68%,transparent 68%, transparent 100%), linear-gradient(to right, transparent 0, transparent 50%, alpha(aqua, .5) 50%, alpha(aqua, .5) 50%)
+        &.tails
+          background $circle, $right
 
-        &.end:not(.start)
-          background radial-gradient(circle at center, aqua 0, aqua 68%,transparent 68%, transparent 100%), linear-gradient(to right, alpha(aqua, .5) 0, alpha(aqua, .5) 50%, transparent 50%, transparent 50%)
+      &.end:not(.start)
+        background $circle, $left
 
-.scattered .select
-  background radial-gradient(circle at center, aqua 0, aqua 68%,transparent 68%, transparent 100%)
+  .scattered .select
+    background $circle
 
-.continuous .select
-  background alpha(aqua, .5)
+  .continuous .select
+    background alpha(brand-color, .5)
