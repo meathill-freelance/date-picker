@@ -3,6 +3,7 @@
  */
 
 import DatePicker from './DatePicker';
+import EasyDate from './EasyDate';
 
 function max(array) {
   let last = array.pop();
@@ -38,8 +39,8 @@ class RangeDatePicker extends DatePicker {
     this.end.value = end + ' 23:59';
     this.target.val(`${start} ~ ${end}`);
     if (this.startLabel) {
-      this.startLabel.text(RangeDatePicker.formatDate(start, this.options.labelFilterStart));
-      this.endLabel.text(RangeDatePicker.formatDate(end, this.options.labelFilterEnd));
+      this.startLabel.text(RangeDatePicker.formatDate(start, this.options.format, this.options.labelFilterStart));
+      this.endLabel.text(RangeDatePicker.formatDate(end, this.options.format, this.options.labelFilterEnd));
     }
     this.hide();
   }
@@ -124,7 +125,9 @@ class RangeDatePicker extends DatePicker {
     }
   }
 
-  static formatDate(date, filter = '{m}月{d}日') {
+  static formatDate(date, format, filter = '{m}月{d}日') {
+    date = date.toString();
+    date = EasyDate.isDate(date, format);
     let ymd = date.split('-');
     return filter.replace(/{m+}/, Number(ymd[1]).toString())
       .replace(/{d+}/, Number(ymd[2]).toString());

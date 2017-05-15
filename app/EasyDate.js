@@ -105,7 +105,7 @@ class EasyDate {
       let label = EasyDate.format(date, format);
       dates.push({
         date: label.substr(0, 10),
-        today: today && today.toString() == label,
+        today: today && today.toString() === label,
         disabled: (start && label < start.toString()) || (end && label > end.toString())
       });
       date.setDate(date.getDate() + 1);
