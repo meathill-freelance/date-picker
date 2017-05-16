@@ -38,9 +38,12 @@ class RangeDatePicker extends DatePicker {
     this.start.value = start + ' 00:00';
     this.end.value = end + ' 23:59';
     this.target.val(`${start} ~ ${end}`);
+    let event = document.createEvent('HTMLEvents'); // 为了让 Vue 能接收到事件
+    event.initEvent('change', true, true);
+    this.target[0].dispatchEvent(event);
     if (this.startLabel) {
-      this.startLabel.text(RangeDatePicker.formatDate(start, this.options.format, this.options.labelFilterStart));
-      this.endLabel.text(RangeDatePicker.formatDate(end, this.options.format, this.options.labelFilterEnd));
+      this.startLabel.text(this.formatDate(start, this.options.labelFilterStart));
+      this.endLabel.text(this.formatDate(end, this.options.labelFilterEnd));
     }
     this.hide();
   }
@@ -97,7 +100,7 @@ class RangeDatePicker extends DatePicker {
     if ((!start || start.length === 0) && (!end || end.length === 0)) {
       li.addClass('select start');
       start = li;
-      this.startDate.text(RangeDatePicker.formatDate(start.data('date')));
+      this.startDate.text(this.formatDate(start.data('date')));
       return;
     }
 
@@ -117,17 +120,17 @@ class RangeDatePicker extends DatePicker {
       .slice(Math.min(startIndex, index), Math.max(startIndex, index))
       .addClass('select');
     end = li;
-    this.startDate.text(RangeDatePicker.formatDate(start.data('date')));
-    this.endDate.text(RangeDatePicker.formatDate(end.data('date')));
+    this.startDate.text(this.formatDate(start.data('date')));
+    this.endDate.text(this.formatDate(end.data('date')));
 
     if (!this.options.confirm && start.length && end.length) {
       this.confirm();
     }
   }
 
-  static formatDate(date, format, filter = '{m}月{d}日') {
+  formatDate(date, filter = '{m}月{d}日') {
     date = date.toString();
-    date = EasyDate.isDate(date, format);
+    date = EasyDate.isDate(date, this.options.format);
     let ymd = date.split('-');
     return filter.replace(/{m+}/, Number(ymd[1]).toString())
       .replace(/{d+}/, Number(ymd[2]).toString());
