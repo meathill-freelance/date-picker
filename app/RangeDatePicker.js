@@ -25,10 +25,12 @@ class RangeDatePicker extends DatePicker {
 
     this.startDate = this.$el.find('.start-date');
     this.endDate = this.$el.find('.end-date');
-    let labels = $(`[for=${this.target[0].id}].tqb-date-picker-label`);
-    if (labels.length) {
-      this.startLabel = labels.filter('.start');
-      this.endLabel = labels.filter('.end');
+    if (this.target.attr('id')) {
+      let labels = $(`[for=${this.target[0].id}].tqb-date-picker-label`);
+      if (labels.length) {
+        this.startLabel = labels.filter('.start');
+        this.endLabel = labels.filter('.end');
+      }
     }
   }
 

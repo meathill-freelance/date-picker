@@ -76,7 +76,9 @@ gulp.task('html', () => {
 gulp.task('copy', () => {
   return event.merge(
     gulp.src('build/**').pipe(gulp.dest(DOC)),
-    gulp.src(['css/sample.css']).pipe(gulp.dest(DOC + 'css/'))
+    gulp.src(['css/sample.css'])
+      .pipe(replace(/\/\*# sourceMappingURL=[\S]+ \*\//g, ''))
+      .pipe(gulp.dest(DOC + 'css/'))
   );
 });
 
