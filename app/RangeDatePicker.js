@@ -102,7 +102,7 @@ class RangeDatePicker extends DatePicker {
     if ((!start || start.length === 0) && (!end || end.length === 0)) {
       li.addClass('select start');
       start = li;
-      this.startDate.text(this.formatDate(start.data('date')));
+      this.startDate.removeClass('active').text(this.formatDate(start.data('date')));
       return;
     }
 

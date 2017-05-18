@@ -48,7 +48,7 @@ export default class DatePicker {
     }
     options.months = months;
     let item = $(template(options));
-    item.insertAfter(this.target);
+    item.appendTo(document.body);
     this.$el = item;
     this.lastMonth = current;
     if (options.fixCalendarContainer) {

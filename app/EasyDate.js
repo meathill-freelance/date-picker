@@ -114,6 +114,7 @@ class EasyDate {
   }
 
   static isDate(string, format) {
+    format = format || defaultFormat;
     string = string.toString();
     let pos = [];
     let regexps = [/d+/gi, /y+/gi, /m+/gi];
