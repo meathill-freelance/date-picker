@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    'tqb-data-picker': './app/main.js',
+    'tqb-date-picker': './app/main.js',
     dev: './app/dev.js'
   },
   output: {

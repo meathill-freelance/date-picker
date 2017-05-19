@@ -47,7 +47,7 @@ gulp.task('theme', () => {
     }))
     .pipe(cleanCSS())
     .pipe(gulp.dest(DEST + 'css/'));
-})
+});
 
 gulp.task('webpack', () => {
   return gulp.src('app/main.js')
