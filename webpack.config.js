@@ -2,6 +2,7 @@
  * Created by realm on 2017/2/15.
  */
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -30,9 +31,9 @@ module.exports = {
     ignored: /node_modules|dist|build|docs|css/,
     poll: 1000
   },
-  resolve: {
-    alias: {
-      config: path.resolve(__dirname, './config/dev.js')
-    }
-  }
+  plugins: [
+    new webpack.DefinePlugin({
+      DEBUG: true
+    })
+  ]
 };

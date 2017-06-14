@@ -3,7 +3,6 @@
  */
 
 import marked from 'marked';
-import { DEBUG } from 'config';
 import EasyDate from './EasyDate';
 
 if (DEBUG) {
