@@ -1,6 +1,7 @@
 /**
  * Created by realm on 2017/2/15.
  */
+import $ from 'jquery';
 import template from '../template/picker.hbs';
 import calendar from '../template/calendar.hbs';
 import EasyDate from './EasyDate';
@@ -96,7 +97,7 @@ export default class DatePicker {
     });
   }
 
-  setValue(value, options) {
+  setValue(value) {
     let values = value.split(',');
     values.forEach( value => {
       this.$el.find('[data-date="' + value + '"]').addClass('select');
@@ -140,4 +141,4 @@ export default class DatePicker {
       this.confirm();
     }
   }
-};
+}

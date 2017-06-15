@@ -26,6 +26,9 @@ module.exports = {
       }
     ]
   },
+  externals: {
+    jquery: 'jQuery'
+  },
   watch: true,
   watchOptions: {
     ignored: /node_modules|dist|build|docs|css/,

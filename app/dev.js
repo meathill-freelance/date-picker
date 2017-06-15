@@ -2,9 +2,11 @@
  * Created by realm on 2017/2/27.
  */
 
+import $ from 'jquery';
 import marked from 'marked';
 import EasyDate from './EasyDate';
 
+/* global DEBUG */
 if (DEBUG) {
   $.get('./README.md')
     .then( content => {

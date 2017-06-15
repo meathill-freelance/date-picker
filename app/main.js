@@ -2,6 +2,7 @@
  * Created by meathill on 2017/2/2.
  */
 
+import $ from 'jquery';
 import Factory from './Factory';
 
 $('body').on('click', '.tqb-date-picker-input,.tqb-date-picker-label', function (event) {
@@ -36,6 +37,7 @@ if (/\bmicromessenger\b/i.test(navigator.userAgent) && !('FastClick' in window))
   script.async = true;
   script.src = '//cdn.staticfile.org/fastclick/1.0.6/fastclick.min.js';
   script.onload = () => {
+    /* global FastClick */
     FastClick.attach(document.body);
   };
   document.body.appendChild(script);
