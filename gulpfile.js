@@ -13,12 +13,26 @@ const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 const base64 = require('gulp-base64');
 const replace = require('gulp-replace');
+const header = require('gulp-header');
 const event = require('event-stream');
 const marked = require('marked');
 const del = require('del');
 const DEST = 'build/';
 const DOC = 'docs/';
 const CDN = require('./cdn.json');
+const pkg = require('./package.json');
+
+let info = `/**
+ * ${pkg.name} - ${pkg.description}
+ * @version v${pkg.version}
+ * @link ${pkg.homepage}
+ * @license ${pkg.license}
+ * @author ${pkg.author}
+ *
+ * 天气宝 http://baotianqi.cn/
+ * built at ${new Date()}
+ */
+`;
 
 gulp.task('sourcemap', () => {
   gulp.src('dist/*.js')
@@ -35,8 +49,11 @@ gulp.task('stylus', () => {
     .pipe(stylus({
       compress: true
     }))
-    .pipe(cleanCSS())
+    .pipe(cleanCSS({
+      level: 2
+    }))
     .pipe(base64())
+    .pipe(header(info))
     .pipe(rename('tqb-date-picker.min.css'))
     .pipe(gulp.dest(DEST + 'css/'));
 });
@@ -49,6 +66,7 @@ gulp.task('theme', () => {
     .pipe(cleanCSS({
       level: 2
     }))
+    .pipe(header(info))
     .pipe(gulp.dest(DEST + 'css/'));
 });
 
@@ -56,6 +74,7 @@ gulp.task('webpack', () => {
   return gulp.src('app/main.js')
     .pipe(webpackStream( require('./webpack.config.build'), webpack))
     .pipe(uglify())
+    .pipe(header(info))
     .pipe(gulp.dest(DEST + 'js/'));
 });
 
