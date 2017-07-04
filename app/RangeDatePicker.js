@@ -112,8 +112,8 @@ class RangeDatePicker extends DatePicker {
       start = li;
       if (this.options.range) {
         let index = this.center = li.data('index');
-        let left = index - this.options.range;
-        let right = index + this.options.range + 1;
+        let left = index - this.options.range + 1;
+        let right = index + this.options.range;
         if (left > 0) {
           lis
             .slice(0, left)
