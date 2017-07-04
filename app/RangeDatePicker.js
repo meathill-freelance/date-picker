@@ -106,15 +106,32 @@ class RangeDatePicker extends DatePicker {
     }
 
     let li = $(event.currentTarget);
+    let lis = this.$el.find('li[data-index]');
     if ((!start || start.length === 0) && (!end || end.length === 0)) {
       li.addClass('select start');
       start = li;
+      if (this.options.range) {
+        let index = this.center = li.data('index');
+        let left = index - this.options.range;
+        let right = index + this.options.range + 1;
+        if (left > 0) {
+          lis
+            .slice(0, left)
+            .addClass('out-range');
+        }
+        if (right < lis.length) {
+          lis.slice(right, lis.length)
+            .addClass('out-range');
+        }
+      }
       this.startDate.removeClass('active').text(this.formatDate(start.data('date')));
       return;
     }
 
     let startIndex = start.data('index');
     let index = li.data('index');
+    this.$el.find('.out-range')
+      .removeClass('out-range');
     if (startIndex <= index) {
       li.addClass('select end');
       if (startIndex < index) {
@@ -125,7 +142,7 @@ class RangeDatePicker extends DatePicker {
         .addClass('end');
       li.addClass('select start tails');
     }
-    this.$el.find('li[data-index]')
+    lis
       .slice(Math.min(startIndex, index), Math.max(startIndex, index))
       .addClass('select');
     end = li;
@@ -143,6 +160,15 @@ class RangeDatePicker extends DatePicker {
     let ymd = date.split('-');
     return filter.replace(/{m+}/, Number(ymd[1]).toString())
       .replace(/{d+}/, Number(ymd[2]).toString());
+  }
+
+  onScroll(event) {
+    let isAppended = super.onScroll(event);
+    if (isAppended && this.center) {
+      this.$el.find('li[data-index]')
+        .slice(this.center + this.options.range)
+        .addClass('out-range');
+    }
   }
 }
 

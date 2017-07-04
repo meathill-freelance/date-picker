@@ -76,7 +76,7 @@ export default class DatePicker {
 
   delegateEvent(options) {
     this.$el
-      .on('click', 'li:not(.disabled,.empty)', this.onClick.bind(this))
+      .on('click', 'li:not(.disabled,.empty,.out-range)', this.onClick.bind(this))
       .on('click', '.tqb-dp-close-button', () => {
         this.$el.addClass('out');
       })
@@ -87,22 +87,9 @@ export default class DatePicker {
         this.$el.toggleClass('hide', this.$el.hasClass('out'));
       });
 
-    let container = this.$el.find('.tqb-dp-container');
-    let onScroll = () => {
-      if (container[0].scrollHeight - container.scrollTop() <= container[0].offsetHeight + 10) {
-        let item = calendar(this.createMonthObject(this.lastMonth, options.today, options.start, options.end));
-        container.append(item);
-        this.lastMonth.add('+1m');
-        if (options.end) {
-          let end = new EasyDate(options.end, options);
-          end.add('+1m');
-          if (this.lastMonth.isSameMonth(end)) {
-            container.off('scroll', onScroll);
-          }
-        }
-      }
-    };
-    container.on('scroll', onScroll);
+    if (!this.lastMonth.isGreaterOrEqual(options.end)) {
+      this.$el.find('.tqb-dp-container').on('scroll', this.onScroll.bind(this));
+    }
   }
 
   setValue(value) {
@@ -147,6 +134,19 @@ export default class DatePicker {
     li.addClass('select');
     if (!this.options.confirm) {
       this.confirm();
+    }
+  }
+
+  onScroll(event) {
+    let container = event.target;
+    if (container.scrollHeight - container.scrollTop <= container.offsetHeight + 10) {
+      let item = calendar(this.createMonthObject(this.lastMonth, this.options.today, this.options.start, this.options.end));
+      container.appendChild($(item)[0]);
+      this.lastMonth.add('+1m');
+      if (this.lastMonth.isGreaterOrEqual(this.options.end)) {
+        $(container).off('scroll');
+      }
+      return true;
     }
   }
 }

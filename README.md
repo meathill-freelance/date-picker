@@ -25,6 +25,7 @@ A date picker component for 天气宝
 | `multiple` | 不连续日期选择时，是否可选多个日期 |
 | `start` | 可选日期范围的起点，默认是今天 |
 | `end` | 可选日期范围的终点，为空则没有，即用户可以选择任意时间 |
+| `range` | 起始日期之间的跨度，只在事件段选择时生效 |
 | `format` | 日期格式，默认为 `yyyy-mm-dd`，无大小写区分 |
 | `labelFilterStart` | 输出到开始日期 <label> 里的日期格式 |
 | `labelFilterEnd` | 输出到结束日期 <label> 里的日期格式 |

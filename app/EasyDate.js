@@ -57,6 +57,16 @@ class EasyDate {
     return date.getDay();
   }
 
+  isGreaterOrEqual(date) {
+    if (!date) {
+      return false;
+    }
+    date = date instanceof EasyDate ? date : new EasyDate(date, {
+      format: this.format
+    });
+    return this.toString() >= date.toString();
+  }
+
   isSameMonth(date) {
     date = date instanceof EasyDate ? date.toDate() : date;
     return this.base.getFullYear() === date.getFullYear() && this.base.getMonth() === date.getMonth();

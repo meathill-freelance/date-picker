@@ -53,6 +53,10 @@
 <td>可选日期范围的终点，为空则没有，即用户可以选择任意时间</td>
 </tr>
 <tr>
+<td><code>range</code></td>
+<td>起始日期之间的跨度，只在事件段选择时生效</td>
+</tr>
+<tr>
 <td><code>format</code></td>
 <td>日期格式，默认为 <code>yyyy-mm-dd</code>，无大小写区分</td>
 </tr>
@@ -139,6 +143,10 @@
   <p class="form-group">
     <label>动态变更日期范围</label>
     <input class="form-control tqb-date-picker-input" data-start="2017-03-01" data-end="2017-03-31" placeholder="动态变更日期范围" name="data-range-dynamic">
+  </p>
+  <p class="form-group">
+    <label>限定两个日期的距离</label>
+    <input class="form-control tqb-date-picker-input" data-range="3" placeholder="限定两个日期的距离" name="date-range" data-confirm="true" data-end="2017-09-15">
   </p>
   <div class="form-group">
     <label>用两个 <code>&lt;label&gt;</code> 显示选择的日期</label>
