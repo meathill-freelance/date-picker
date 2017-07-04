@@ -87,14 +87,22 @@ export default class DatePicker {
         this.$el.toggleClass('hide', this.$el.hasClass('out'));
       });
 
-    this.$el.find('.tqb-dp-container').on('scroll', event => {
-      let container = event.target;
-      if (container.scrollHeight - container.scrollTop <= container.offsetHeight + 10) {
+    let container = this.$el.find('.tqb-dp-container');
+    let onScroll = () => {
+      if (container[0].scrollHeight - container.scrollTop() <= container[0].offsetHeight + 10) {
         let item = calendar(this.createMonthObject(this.lastMonth, options.today, options.start, options.end));
-        $(container).append(item);
+        container.append(item);
         this.lastMonth.add('+1m');
+        if (options.end) {
+          let end = new EasyDate(options.end, options);
+          end.add('+1m');
+          if (this.lastMonth.isSameMonth(end)) {
+            container.off('scroll', onScroll);
+          }
+        }
       }
-    });
+    };
+    container.on('scroll', onScroll);
   }
 
   setValue(value) {

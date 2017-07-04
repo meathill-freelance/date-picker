@@ -7,7 +7,8 @@ const gulp = require('gulp');
 const sequence = require('run-sequence');
 const stylus = require('gulp-stylus');
 const cleanCSS = require('gulp-clean-css');
-const webpack = require('gulp-webpack');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
 const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 const base64 = require('gulp-base64');
@@ -45,13 +46,15 @@ gulp.task('theme', () => {
     .pipe(stylus({
       compress: true
     }))
-    .pipe(cleanCSS())
+    .pipe(cleanCSS({
+      level: 2
+    }))
     .pipe(gulp.dest(DEST + 'css/'));
 });
 
 gulp.task('webpack', () => {
   return gulp.src('app/main.js')
-    .pipe(webpack( require('./webpack.config.build')))
+    .pipe(webpackStream( require('./webpack.config.build'), webpack))
     .pipe(uglify())
     .pipe(gulp.dest(DEST + 'js/'));
 });

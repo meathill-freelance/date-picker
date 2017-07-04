@@ -58,6 +58,7 @@ class EasyDate {
   }
 
   isSameMonth(date) {
+    date = date instanceof EasyDate ? date.toDate() : date;
     return this.base.getFullYear() === date.getFullYear() && this.base.getMonth() === date.getMonth();
   }
 
