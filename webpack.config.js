@@ -6,8 +6,8 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    'tqb-date-picker': './app/main.js',
-    dev: './app/dev.js'
+    dev: './app/dev.js',
+    standalone: './app/dev-standalone.js',
   },
   output: {
     filename: '[name].bundle.js',
@@ -18,16 +18,17 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['babel-loader', 'eslint-loader']
+        loaders: 'babel-loader',
       },
       {
-        test: /\.hbs$/,
-        loader: 'handlebars-loader'
-      }
-    ]
+        test: /\.vue$/,
+        loaders: 'vue-loader',
+      },
+    ],
   },
   externals: {
-    jquery: 'jQuery'
+    jquery: 'jQuery',
+    vue: 'Vue',
   },
   watch: true,
   watchOptions: {
@@ -37,6 +38,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       DEBUG: true
-    })
-  ]
+    }),
+  ],
+  devtool: 'source-map',
 };

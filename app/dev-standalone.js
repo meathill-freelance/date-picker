@@ -6,7 +6,7 @@ import $ from 'jquery';
 import Vue from 'vue';
 import marked from 'marked';
 //import EasyDate from './EasyDate';
-import VueDatePicker from './VueDatePicker';
+import VueDatePicker from './VueDatePicker.vue';
 
 /* global DEBUG, console */
 if (DEBUG) {
@@ -17,10 +17,11 @@ if (DEBUG) {
     });
 }
 
-Vue.component('date-picker', VueDatePicker);
-
 new Vue({
   el: '#app',
+  components: {
+    DatePicker: VueDatePicker,
+  },
   data() {
     return {
       singleDate: null,

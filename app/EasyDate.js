@@ -117,7 +117,8 @@ class EasyDate {
       dates.push({
         date: label.substr(0, 10),
         today: today && today.toString() === label,
-        disabled: (start && label < start.toString()) || (end && label > end.toString())
+        disabled: (start && label < start.toString()) || (end && label > end.toString()),
+        isSelected: false,
       });
       date.setDate(date.getDate() + 1);
     }

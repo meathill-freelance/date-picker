@@ -78,11 +78,11 @@
     </div>
   </div>
 </section>
-<form class="container">
+<form class="container" id="app">
   <h2>实例</h2>
   <p class="form-group">
     <label>选择单日</label>
-    <input class="form-control tqb-date-picker-input" placeholder="Click me!" data-scattered="true" name="single-date">
+    <date-picker placeholder="Click me!" :scattered="true" name="single-date" v-model="singleDate"></date-picker>
   </p>
   <p class="form-group">
     <label>选择多个单日</label>
@@ -132,10 +132,8 @@
 
 
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
-<script src="node_modules/tether/dist/js/tether.min.js"></script>
-<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="node_modules/vue/dist/vue.min.js"></script>
 <script src="node_modules/prismjs/prism.js"></script>
-<script src="dist/tqb-date-picker.bundle.js"></script>
-<script src="dist/dev.bundle.js"></script>
+<script src="dist/standalone.bundle.js"></script>
 </body>
 </html>
