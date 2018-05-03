@@ -1,10 +1,9 @@
 import EasyDate from './EasyDate';
-import util from './utils';
 
 export default {
   template: `
 <div class="vue-date-picker">
-  <input @focus="onFocus" class="form-control tqb-date-picker-input" :placeholder="placeholder" :name="name" :value="this.value">
+  <input @focus.prevent="onFocus" class="form-control tqb-date-picker-input" :placeholder="placeholder" :name="name" :value="this.value" readonly>
   <div class="tqb-date-picker" :class="{static: static, scattered: scattered, continuous: !scattered}" v-if="isShowCalendar">
     <header class="tqb-dp-header">
       <button type="button" class="tqb-dp-close-button" @click="close"></button>
@@ -30,7 +29,7 @@ export default {
           <h4>{{month.year}}年{{month.month}}月</h4>
         </header>
         <ul>
-          <li class="empty" :class="'empty-' + empty"></li>
+          <li class="empty" :class="'empty-' + month.empty"></li>
           <li :class="{today: day.today, select: day.isSelected}" @click="onClick(day)" v-for="day in month.days"></li>
         </ul>
       </div>
@@ -45,6 +44,15 @@ export default {
         height: window.innerHeight - 105,
       } : null;
     },
+    today() {
+      return new EasyDate(0, this.options);
+    },
+    _start() {
+      return this.start ? new EasyDate(this.start, this.options) : this.today;
+    },
+    _end() {
+      return this.end ? new EasyDate(this.end, this.options) : null;
+    },
   },
 
   data() {
@@ -52,10 +60,11 @@ export default {
       isShowCalendar: false,
 
       localValue: new Set(),
-      empty: 0,
       months: null,
-      range: null,
       lastMonth: null,
+      options: {
+        format: 'YYYY-MM-DD',
+      },
     };
   },
 
@@ -113,17 +122,11 @@ export default {
     },
 
     createElement() {
-      const options = {
-        format: this.format,
-      };
-      let today = this.today = new EasyDate(0, options);
-      let start = this.start ? new EasyDate(this.start, options) : today;
-      let end = this.end ? new EasyDate(this.end, options) : null;
-      let current = start.clone();
+      let current = this._start.clone();
       current.setDate(1);
       let months = [];
       for (let i = 0; i< 2; i++) { // 默认画两个月
-        let month = this.createMonthObject(current, today, start, end);
+        let month = this.createMonthObject(current, this.today, this._start, this._end);
         months.push(month);
         current.add('1m');
       }
@@ -155,7 +158,6 @@ export default {
     },
 
     onFocus() {
-      this.range = util.getRange({start: this.start, end: this.end});
       this.createElement();
       this.isShowCalendar = true;
     },
