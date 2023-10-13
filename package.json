@@ -25,8 +25,8 @@
   "author": "Meathill <meathill@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "jquery": "^3.7.0",
-    "vue": "^2.7.14"
+    "jquery": "^3.7.1",
+    "vue": "^3.3.4"
   },
   "repository": {
     "type": "git",
@@ -37,7 +37,7 @@
   },
   "homepage": "https://meathill-freelance.github.io/date-picker/",
   "devDependencies": {
-    "bootstrap": "^5.3.1",
+    "bootstrap": "^5.3.2",
     "colors.css": "^3.0.0",
     "marked": "^9.1.1",
     "moment": "^2.29.4",
